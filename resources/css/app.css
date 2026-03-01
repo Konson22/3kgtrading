@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@import 'tailwindcss';
+
+@import 'tw-animate-css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+/* 3K logo: primary (green), secondary (orange), accent (light green) */
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+}
+
+:root {
+  --primary: oklch(0.48 0.16 145);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.55 0.19 35);
+  --secondary-foreground: oklch(0.985 0 0);
+  --accent: oklch(0.35 0 0);
+  --accent-foreground: oklch(0.96 0.02 145)
+}
+
+@layer base {
+  body {
+    @apply bg-white text-neutral-800;
+  }
+}
+
+@layer utilities {
+
+}
+
+/* Hero Swiper: pagination bullets visible on dark gradient */
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+.swiper-pagination-bullet-active {
+  background: white;
+  width: 1.5rem;
+  border-radius: 0.25rem;
+}
