@@ -6,15 +6,16 @@ import { ServicesProvider } from "./context/ServicesContext";
 import GuestLayout from "./layouts/GuestLayout";
 import "../css/app.css";
 
-import AboutPage from "./pages/guest/about/index";
-import ContactPage from "./pages/guest/contact/index";
-import MainPage from "./pages/guest/main/index";
-import PrivacyPage from "./pages/guest/privacy/index";
-import ProjectsPage from "./pages/guest/projects/index";
+import AboutPage from "./pages/guest/about";
+import ContactPage from "./pages/guest/contacts";
+import Main from "./pages/guest/main";
+import PrivacyPage from "./pages/guest/privacy";
+import ProjectsPage from "./pages/guest/projects";
 import ProjectDetailsPage from "./pages/guest/projects/details";
-import ServicesPage from "./pages/guest/services/index";
+import RequestServicePage from "./pages/guest/request-service";
+import ServicesPage from "./pages/guest/services";
 import ServiceDetailsPage from "./pages/guest/services/details";
-import TermsPage from "./pages/guest/terms/index";
+import TermsPage from "./pages/guest/terms";
 
 const root = document.getElementById("guest-app");
 if (!root) throw new Error("Root element #guest-app not found");
@@ -26,13 +27,15 @@ createRoot(root).render(
         <ServicesProvider>
           <Routes>
             <Route element={<GuestLayout />}>
-              <Route path="/" element={<MainPage />} />
+              <Route path="/" element={<Main />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/services/:slug" element={<ServiceDetailsPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/projects/:slug" element={<ProjectDetailsPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/quote" element={<RequestServicePage />} />
+              <Route path="/request-service" element={<RequestServicePage />} />
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/terms" element={<TermsPage />} />
             </Route>

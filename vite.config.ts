@@ -30,10 +30,5 @@ export default defineConfig({
         strictPort: true,
         cors: true,
         origin: 'http://localhost:5173',
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, OPTIONS',
-            'Access-Control-Allow-Headers': '*',
-        },
     },
 });

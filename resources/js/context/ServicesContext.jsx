@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext } from "react";
-import services from "../data/services";
+import { services } from "../data/services";
 
 const ServicesContext = createContext(null);
 

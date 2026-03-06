@@ -1,19 +1,24 @@
 import React from "react";
 
-export default function PageSecondaryHero({ title, eyebrow, children }) {
+export default function PageSecondaryHero({ title, eyebrow, children, image }) {
   return (
-    <section className="bg-primary text-white">
-      <div className="container-px mx-auto max-w-6xl py-10 sm:py-14 lg:py-16">
+    <section className="bg-primary-dark text-white" style={{
+      backgroundImage:image ? `url(${image})` : 'none',
+      backgroundSize:'cover',
+      backgroundPosition:'center',
+      backgroundRepeat:'no-repeat',
+    }}>
+      <div className="max-w-6xl mx-auto px-4 py-20 sm:py-14 lg:py-24">
         {eyebrow && (
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 sm:text-sm">
+          <p className="text-xs font-semibold tracking-[0.18em] uppercase text-white/90 mb-3">
             {eyebrow}
           </p>
         )}
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+        <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight mb-4">
           {title}
         </h1>
         {children && (
-          <div className="mt-4 max-w-3xl text-base text-white/95 sm:text-sm">
+          <div className="max-w-3xl text-sm sm:text-base text-white/90">
             {children}
           </div>
         )}

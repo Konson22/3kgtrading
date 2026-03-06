@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
 
 @import 'tailwindcss';
 
@@ -7,36 +7,62 @@
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
-/* 3K logo: primary (green), secondary (orange), accent (light green) */
+/* Theme: primary (red), secondary (green), primary-dark, accent */
 @theme {
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
+  --color-primary: #E33E31;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #459E43;
+  --color-secondary-foreground: #ffffff;
+  --color-primary-dark: #2c2c2c;
+  --color-accent: #459E43;
+  --color-accent-foreground: #ffffff;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --spacing-18: 4.5rem;
+  --spacing-88: 22rem;
+  --spacing-128: 32rem;
+  --radius-xl: 16px;
+  --radius-4xl: 2rem;
+  --radius-5xl: 2.5rem;
+  --shadow-soft: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
+  --shadow-medium: 0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-large: 0 10px 40px -10px rgba(0, 0, 0, 0.15), 0 2px 10px -2px rgba(0, 0, 0, 0.05);
+  --animate-fade-in: fadeIn 0.5s ease-in-out;
+  --animate-slide-up: slideUp 0.5s ease-out;
+  --background-image-gradient-brand: linear-gradient(135deg, #E33E31 0%, #6A6C6B 100%);
+  --background-image-gradient-hero: linear-gradient(135deg, #E33E31 0%, #A1362E 100%);
+  --background-image-gradient-light: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
 }
 
-:root {
-  --primary: oklch(0.48 0.16 145);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.55 0.19 35);
-  --secondary-foreground: oklch(0.985 0 0);
-  --accent: oklch(0.35 0 0);
-  --accent-foreground: oklch(0.96 0.02 145)
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 @layer base {
   body {
-    @apply bg-white text-neutral-800;
+    @apply bg-white text-neutral-800 m-0 p-0;
   }
 }
 
 @layer utilities {
-
+  .font-display {
+    font-family: var(--font-display);
+  }
 }
 
-/* Hero Swiper: pagination bullets visible on dark gradient */
+/* Hero Swiper: ensure proper height and pagination */
+.hero-section .swiper,
+.hero-section .swiper-wrapper,
+.hero-section .swiper-slide {
+  height: 100%;
+}
+
 .swiper-pagination-bullet {
   background: rgba(255, 255, 255, 0.5);
   opacity: 1;
@@ -45,4 +71,31 @@
   background: white;
   width: 1.5rem;
   border-radius: 0.25rem;
+}
+
+/* Hero slide content: animate when slide becomes active */
+.hero-slide-content .hero-animate {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.swiper-slide:not(.swiper-slide-active) .hero-slide-content .hero-animate {
+  animation: none;
+}
+.swiper-slide-active .hero-slide-content .hero-animate {
+  animation: heroSlideUp 0.6s ease-out forwards;
+}
+.swiper-slide-active .hero-slide-content .hero-eyebrow { animation-delay: 0.05s; }
+.swiper-slide-active .hero-slide-content .hero-title { animation-delay: 0.15s; }
+.swiper-slide-active .hero-slide-content .hero-desc { animation-delay: 0.25s; }
+.swiper-slide-active .hero-slide-content .hero-cta { animation-delay: 0.35s; }
+
+@keyframes heroSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

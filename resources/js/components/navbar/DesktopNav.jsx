@@ -10,10 +10,10 @@ export default function DesktopNav({ mainNav, isActive }) {
           key={item.to}
           to={item.to}
           className={cn(
-            "rounded-lg px-4 py-2 text-sm font-medium text-neutral-600 transition-colors",
-            "hover:bg-neutral-100 hover:text-neutral-900",
+            "rounded-lg px-4 py-0 text-md font-bold text-white transition-colors",
+            "hover:bg-primary hover:text-white",
             "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-            isActive(item.to) && "bg-primary/10 text-primary font-medium"
+            isActive(item.to) && "bg-primary text-white font-medium"
           )}
         >
           {item.label}
