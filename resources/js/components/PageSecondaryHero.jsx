@@ -1,9 +1,18 @@
 import React from "react";
 
-export default function PageSecondaryHero({ title, eyebrow, children, image }) {
+const darkGradient = 'linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.65))';
+
+export default function PageSecondaryHero({ title, eyebrow, children, image, darkGradientOverlay }) {
+  const bgImage = darkGradientOverlay
+    ? image
+      ? `${darkGradient}, url(${image})`
+      : darkGradient
+    : image
+      ? `url(${image})`
+      : 'none';
   return (
     <section className="bg-primary-dark text-white" style={{
-      backgroundImage:image ? `url(${image})` : 'none',
+      backgroundImage: bgImage,
       backgroundSize:'cover',
       backgroundPosition:'center',
       backgroundRepeat:'no-repeat',

@@ -39,8 +39,8 @@ const contactItems = [
   },
 ];
 
-const inputClass = "w-full px-4 py-3 rounded-lg border border-white/20 bg-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition-colors";
-const labelClass = "block text-sm font-medium text-white/90 mb-1";
+const inputClass = "w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition-colors";
+const labelClass = "block text-sm font-medium text-gray-700 mb-1";
 
 export default function ContactSection() {
   const { services } = useServices();
@@ -66,20 +66,20 @@ export default function ContactSection() {
 
   if (submitted) {
     return (
-      <section className="py-20 bg-primary-dark text-white">
+      <section className="py-20 text-gray-900">
         <div className="container-px max-w-2xl mx-auto text-center">
-          <div className="p-10 rounded-2xl bg-white/5 border border-secondary/30">
+          <div className="p-10 rounded-2xl bg-gray-50 border border-secondary/30">
             <div className="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-6">
               <svg className="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
             <h3 className="text-xl font-bold mb-2">Thank You</h3>
-            <p className="text-white/90 mb-4">
+            <p className="text-gray-700 mb-4">
               We have received your request and will get back to you shortly.
             </p>
-            <p className="text-white/70 text-sm">
-              We&apos;ll contact you at <strong className="text-white">{formData.email}</strong> or <strong className="text-white">{formData.phone}</strong>.
+            <p className="text-gray-600 text-sm">
+              We&apos;ll contact you at <strong className="text-gray-900">{formData.email}</strong> or <strong className="text-gray-900">{formData.phone}</strong>.
             </p>
           </div>
         </div>
@@ -88,13 +88,13 @@ export default function ContactSection() {
   }
 
   return (
-    <section className="py-20 bg-primary-dark text-white">
+    <section className="py-20 text-gray-900">
       <div className="container-px max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <span className="text-secondary font-semibold text-sm uppercase tracking-[0.2em]">Get in Touch</span>
           <h2 className="text-3xl sm:text-4xl font-bold mt-3 mb-4">Contact Us</h2>
           <div className="w-16 h-1 bg-secondary rounded-full mx-auto mb-6" aria-hidden />
-          <p className="text-white/90 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-700 max-w-2xl mx-auto text-lg">
             Reach out for quality services in construction, financial management, and property solutions.
           </p>
         </div>
@@ -103,21 +103,21 @@ export default function ContactSection() {
             {contactItems.map((item) => (
               <div
                 key={item.label}
-                className="flex items-start gap-4 p-5 rounded-xl bg-white/5 border border-white/10 hover:border-secondary/40 transition-all duration-300"
+                className="flex items-start gap-4 p-5 rounded-xl bg-gray-50 border border-gray-200 hover:border-secondary/40 transition-all duration-300"
               >
                 <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-lg bg-secondary/20 text-secondary">
                   {item.icon}
                 </div>
                 <div>
-                  <span className="text-white/70 text-xs font-semibold uppercase tracking-wider">{item.label}</span>
+                  <span className="text-gray-600 text-xs font-semibold uppercase tracking-wider">{item.label}</span>
                   {item.href ? (
-                    <a href={item.href} className="block text-white font-semibold hover:text-secondary transition-colors">
+                    <a href={item.href} className="block text-gray-900 font-semibold hover:text-secondary transition-colors">
                       {item.value}
                     </a>
                   ) : (
-                    <p className="text-white font-semibold">{item.value}</p>
+                    <p className="text-gray-900 font-semibold">{item.value}</p>
                   )}
-                  {item.sub && <p className="text-white/80 text-sm mt-0.5">{item.sub}</p>}
+                  {item.sub && <p className="text-gray-700 text-sm mt-0.5">{item.sub}</p>}
                 </div>
               </div>
             ))}
@@ -132,7 +132,7 @@ export default function ContactSection() {
             </Link>
           </div>
           <div className="lg:col-span-3">
-            <form onSubmit={handleSubmit} className="p-8 rounded-2xl bg-white/5 border border-white/10 space-y-5">
+            <form onSubmit={handleSubmit} className="p-8 rounded-2xl bg-gray-50 border border-gray-200 space-y-5">
               <h3 className="text-xl font-bold mb-6">Request a Service</h3>
               <div>
                 <label htmlFor="contact-name" className={labelClass}>Full Name *</label>
@@ -199,7 +199,7 @@ export default function ContactSection() {
                 >
                   <option value="">Select a service</option>
                   {services.map((s) => (
-                    <option key={s.id} value={s.name} className="bg-primary-dark text-white">
+                    <option key={s.id} value={s.name} className="bg-white text-gray-900">
                       {s.name}
                     </option>
                   ))}

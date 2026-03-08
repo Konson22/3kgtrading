@@ -56,6 +56,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Admin Panel URL (subdomain)
+    |--------------------------------------------------------------------------
+    |
+    | Full URL for the admin panel, e.g. https://admin.example.com. Used for
+    | post-login redirect and subdomain route matching. Set ADMIN_URL in .env.
+    |
+    */
+
+    'admin_url' => env('ADMIN_URL'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |

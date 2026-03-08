@@ -7,6 +7,7 @@ export const projects = [
     endDate: "Ongoing",
     value: "187,000",
     description: "Water points management and revenue collection services",
+    image: "/images/gallery/ssuwc-revenue-collection.png",
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const projects = [
     endDate: "July 2021",
     value: "164,000,000",
     description: "Large-scale water meter connection project",
+    image: "/images/construction2.jpg",
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ export const projects = [
     endDate: "July 2024",
     value: "340,000",
     description: "Installation, repair and maintenance of water meters",
+    image: "/images/construction3.png",
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ export const projects = [
     endDate: "March 2023",
     value: "650,000",
     description: "Solid waste management and revenue collection",
+    image: "/images/general-construction2.jpg",
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ export const projects = [
     endDate: "October 2024",
     value: "660,000",
     description: "Sanitation facilities and water distribution infrastructure",
+    image: "/images/contruction-building.png",
   },
   {
     id: 6,
@@ -52,6 +57,7 @@ export const projects = [
     endDate: "Ongoing",
     value: "160,000",
     description: "Ongoing maintenance of water facilities",
+    image: "/images/contruction-building2.png",
   },
   {
     id: 7,
@@ -61,5 +67,6 @@ export const projects = [
     endDate: "December 2023",
     value: "1,300,000",
     description: "Water pipeline installation for Kator residential area",
+    image: "/images/building.jpg",
   },
 ];

@@ -1,49 +1,117 @@
-import React from "react";
-import PageSecondaryHero from "../../../components/PageSecondaryHero";
-import { useProjects } from "../../../context/ProjectsContext";
+import React from 'react';
+import PageSecondaryHero from '../../../components/PageSecondaryHero';
+import { useProjects } from '../../../context/ProjectsContext';
 
 export default function ProjectsPage() {
-  const { projects } = useProjects();
-  return (
-    <div className="bg-white">
-      <PageSecondaryHero
-        title="Our Projects"
-        eyebrow="Our Experience, Our Pride"
-        image="/images/city.jpg"
-      >
-        <p>Current and past projects delivered across South Sudan with reputable clients.</p>
-      </PageSecondaryHero>
-      <section className="py-16 container-px max-w-6xl mx-auto overflow-x-auto">
-        <div className="min-w-[640px]">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="bg-primary text-white">
-                <th className="text-left p-4 font-semibold">S/N</th>
-                <th className="text-left p-4 font-semibold">Project Name</th>
-                <th className="text-left p-4 font-semibold">Client</th>
-                <th className="text-left p-4 font-semibold">Start Date</th>
-                <th className="text-left p-4 font-semibold">End Date</th>
-                <th className="text-right p-4 font-semibold">Project Value (USD)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {projects.map((project, index) => (
-                <tr
-                  key={project.id}
-                  className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
-                >
-                  <td className="p-4 text-gray-600">{index + 1}</td>
-                  <td className="p-4 font-medium text-gray-900">{project.name}</td>
-                  <td className="p-4 text-primary font-medium">{project.client}</td>
-                  <td className="p-4 text-gray-600">{project.startDate}</td>
-                  <td className="p-4 text-gray-600">{project.endDate}</td>
-                  <td className="p-4 text-right font-semibold text-primary">{project.value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    const { projects } = useProjects();
+
+    return (
+        <div className="bg-white">
+            <PageSecondaryHero
+                title="Our Projects"
+                eyebrow="Our Experience, Our Pride"
+                image="/images/city.jpg"
+                darkGradientOverlay
+            >
+                <p>
+                    Current and past projects delivered across South Sudan with
+                    reputable clients.
+                </p>
+            </PageSecondaryHero>
+
+            {/* Card layout: mobile & tablet */}
+            <section className="container-px mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16 lg:hidden">
+                <div className="space-y-4 sm:space-y-5">
+                    {projects.map((project, index) => (
+                        <article
+                            key={project.id}
+                            className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md sm:p-5"
+                        >
+                            <div className="flex items-start justify-between gap-3">
+                                <span className="rounded bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary sm:text-sm">
+                                    #{index + 1}
+                                </span>
+                                <span className="text-right text-sm font-semibold text-primary sm:text-base">
+                                    {project.value} USD
+                                </span>
+                            </div>
+                            <h3 className="mt-2 font-display text-base font-bold text-gray-900 sm:text-lg">
+                                {project.name}
+                            </h3>
+                            <p className="mt-1 text-sm text-primary sm:text-base">
+                                {project.client}
+                            </p>
+                            <dl className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-600 sm:gap-x-6">
+                                <div>
+                                    <span className="sr-only">Start</span>
+                                    <span>{project.startDate}</span>
+                                </div>
+                                <div>
+                                    <span className="sr-only">End</span>
+                                    <span>{project.endDate}</span>
+                                </div>
+                            </dl>
+                        </article>
+                    ))}
+                </div>
+            </section>
+
+            {/* Table layout: desktop */}
+            <section className="container-px mx-auto max-w-6xl px-4 py-16 sm:px-6 hidden lg:block">
+                <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
+                    <table className="w-full border-collapse">
+                        <thead>
+                            <tr className="bg-primary text-white">
+                                <th className="p-4 text-left font-semibold">
+                                    S/N
+                                </th>
+                                <th className="p-4 text-left font-semibold">
+                                    Project Name
+                                </th>
+                                <th className="p-4 text-left font-semibold">
+                                    Client
+                                </th>
+                                <th className="p-4 text-left font-semibold">
+                                    Start Date
+                                </th>
+                                <th className="p-4 text-left font-semibold">
+                                    End Date
+                                </th>
+                                <th className="p-4 text-right font-semibold">
+                                    Project Value (USD)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {projects.map((project, index) => (
+                                <tr
+                                    key={project.id}
+                                    className="border-b border-gray-200 transition-colors hover:bg-gray-50 last:border-b-0"
+                                >
+                                    <td className="p-4 text-gray-600">
+                                        {index + 1}
+                                    </td>
+                                    <td className="p-4 font-medium text-gray-900">
+                                        {project.name}
+                                    </td>
+                                    <td className="p-4 font-medium text-primary">
+                                        {project.client}
+                                    </td>
+                                    <td className="p-4 text-gray-600">
+                                        {project.startDate}
+                                    </td>
+                                    <td className="p-4 text-gray-600">
+                                        {project.endDate}
+                                    </td>
+                                    <td className="p-4 text-right font-semibold text-primary">
+                                        {project.value}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
-      </section>
-    </div>
-  );
+    );
 }

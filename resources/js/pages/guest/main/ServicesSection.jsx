@@ -1,69 +1,116 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useServices } from "../../../context/ServicesContext";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useServices } from '../../../context/ServicesContext';
 
-export default function ServicesSection() {
-  const { services } = useServices();
-  return (
-    <section className="py-16 sm:py-20 md:py-24 bg-white ">
-      <div className="container-px max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-10 sm:mb-14 md:mb-16">
-          <span className="text-secondary font-semibold text-xs sm:text-sm uppercase tracking-[0.2em]">What We Do</span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mt-2 sm:mt-3 mb-3 sm:mb-4">
-            Our Services
-          </h2>
-          <div className="w-12 sm:w-16 h-1 bg-primary rounded-full mx-auto mb-4 sm:mb-6" aria-hidden />
-          <p className="text-gray-600 max-w-2xl mx-auto text-base sm:text-lg px-2 sm:px-0">
-            3K General Trading Ltd offers financial management, property management, small business consultancy and general construction services.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-6">
-          {services.map((service) => <ServiceCard key={service.id} service={service} />)}
-        </div>
-        <div className="text-center mt-10 sm:mt-14">
-          <Link
-            to="/services"
-            className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-secondary text-white font-semibold rounded-lg hover:bg-secondary/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 shadow-lg text-sm sm:text-base"
-          >
-            View all services
-            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
+function slugify(str) {
+    return str
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
 }
 
+export default function ServicesSection() {
+    const { services } = useServices();
+    return (
+        <section className="relative overflow-hidden py-16 sm:py-20 md:py-24 lg:hidden">
+            <div className="container-px mx-auto max-w-4xl px-4 sm:px-6">
+                <div className="mb-10 text-center sm:mb-14 md:mb-16">
+                    <span className="text-xs font-semibold tracking-[0.2em] text-primary uppercase sm:text-sm">
+                        What We Do
+                    </span>
+                    <h2 className="mt-2 font-display text-2xl font-bold text-gray-900 sm:mt-3 sm:text-3xl md:text-4xl">
+                        Our Services
+                    </h2>
+                    <div
+                        className="mx-auto mt-3 h-1 w-12 rounded-full bg-secondary sm:w-16"
+                        aria-hidden
+                    />
+                    <p className="mx-auto mt-4 max-w-2xl text-base text-gray-600 sm:text-lg">
+                        3K General Trading Ltd offers financial management,
+                        property management, small business consultancy and
+                        general construction services.
+                    </p>
+                </div>
 
+                <div className="grid grid-cols-1 gap-6 sm:gap-8">
+                    {services.map((service, index) => (
+                        <ServiceCard
+                            key={service.id}
+                            service={service}
+                            index={index}
+                        />
+                    ))}
+                </div>
 
-export function ServiceCard({ service }) {
-  return (
-    <Link
-      key={service.id}
-      to="/services"
-      className="group flex flex-col overflow-hidden "
-    >
-      {service.image && (
-        <div className="aspect-video sm:aspect-[16/10] w-full overflow-hidden">
-          <img
-            src={service.image}
-            alt={service.name}
-            className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
+                <div className="mt-12 text-center sm:mt-14">
+                    <Link
+                        to="/services"
+                        className="inline-flex items-center gap-2 rounded-xl border-2 border-primary bg-white px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-white sm:px-8 sm:py-4 sm:text-base"
+                    >
+                        View all services
+                        <svg
+                            className="h-4 w-4 sm:h-5 sm:w-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                        </svg>
+                    </Link>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+export function ServiceCard({ service, index = 0 }) {
+    const href = `/services/${slugify(service.name)}`;
+    return (
+        <div className="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white">
+            {service.image && (
+                <div className="lg:h-[350px]">
+                    <img
+                        src={service.image}
+                        alt={service.name}
+                        className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    />
+                </div>
+            )}
+            <div className="flex flex-1 flex-col p-6">
+                <span className="mb-2 text-xs font-semibold tracking-wider text-secondary uppercase">
+                    Service {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 className="mb-3 font-display text-xl font-bold text-gray-900 sm:text-2xl">
+                    {service.name}
+                </h3>
+                <p className="line-clamp-3 text-sm leading-relaxed text-gray-600">
+                    {service.description}
+                </p>
+                <Link
+                    to={href}
+                    className="group/link mt-5 inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary underline-offset-4 hover:underline"
+                >
+                    Learn more
+                    <svg
+                        className="h-4 w-4 transition-transform group-hover/link:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                    </svg>
+                </Link>
+            </div>
         </div>
-      )}
-      <div className="flex flex-col flex-1 lg:pt-6 pt-4">
-        <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1.5 sm:mb-2 group-hover:text-primary transition-colors">{service.name}</h3>
-        <p className="text-gray-600 text-xs sm:text-sm line-clamp-3 flex-1">{service.description}</p>
-        <span className="inline-flex items-center gap-1 text-primary font-medium text-xs sm:text-sm mt-3 sm:mt-4 group-hover:gap-2 transition-all">
-          Learn more
-          <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </span>
-      </div>
-    </Link>
-  );
+    );
 }

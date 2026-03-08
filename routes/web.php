@@ -13,20 +13,28 @@ $guestView = fn () => view('guest');
 Route::get('/', $guestView)->name('home');
 Route::get('about', $guestView);
 Route::get('services', $guestView);
+Route::get('services/{slug}', $guestView)->where('slug', '[a-z0-9\-]+');
 Route::get('projects', $guestView);
 Route::get('projects/{id}', $guestView)->where('id', '[0-9]+');
-Route::get('billing', $guestView);
-Route::get('news', $guestView);
-Route::get('careers', $guestView);
 Route::get('contact', $guestView);
-Route::get('clients-partners', $guestView);
+Route::get('quote', $guestView);
+Route::get('request-service', $guestView);
 Route::get('privacy', $guestView);
 Route::get('terms', $guestView);
-Route::get('apply-connection', $guestView);
-Route::get('report-issue', $guestView);
 
-Route::get('dashboard', function () {
-    return Inertia::render('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Admin panel: on subdomain when ADMIN_URL is set, else on main domain
+if ($adminUrl = config('app.admin_url')) {
+    $adminHost = parse_url($adminUrl, PHP_URL_HOST);
+    if ($adminHost) {
+        Route::domain($adminHost)
+            ->middleware(['auth', 'verified'])
+            ->group(base_path('routes/admin.php'));
+    }
+    Route::get('dashboard', fn () => redirect()->to(rtrim($adminUrl, '/').'/dashboard'))
+        ->middleware(['auth', 'verified'])
+        ->name('dashboard');
+} else {
+    Route::middleware(['auth', 'verified'])->group(base_path('routes/admin.php'));
+}
 
 require __DIR__.'/settings.php';
