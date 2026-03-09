@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useServices } from "../../../context/ServicesContext";
+import RequestServiceForm from "../../../components/RequestServiceForm";
 
 const contactItems = [
   {
@@ -39,54 +39,7 @@ const contactItems = [
   },
 ];
 
-const inputClass = "w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition-colors";
-const labelClass = "block text-sm font-medium text-gray-700 mb-1";
-
 export default function ContactSection() {
-  const { services } = useServices();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    service: "",
-    message: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
-  if (submitted) {
-    return (
-      <section className="py-20 text-gray-900">
-        <div className="container-px max-w-2xl mx-auto text-center">
-          <div className="p-10 rounded-2xl bg-gray-50 border border-secondary/30">
-            <div className="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-6">
-              <svg className="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold mb-2">Thank You</h3>
-            <p className="text-gray-700 mb-4">
-              We have received your request and will get back to you shortly.
-            </p>
-            <p className="text-gray-600 text-sm">
-              We&apos;ll contact you at <strong className="text-gray-900">{formData.email}</strong> or <strong className="text-gray-900">{formData.phone}</strong>.
-            </p>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section className="py-20 text-gray-900">
       <div className="container-px max-w-6xl mx-auto">
@@ -132,98 +85,11 @@ export default function ContactSection() {
             </Link>
           </div>
           <div className="lg:col-span-3">
-            <form onSubmit={handleSubmit} className="p-8 rounded-2xl bg-gray-50 border border-gray-200 space-y-5">
-              <h3 className="text-xl font-bold mb-6">Request a Service</h3>
-              <div>
-                <label htmlFor="contact-name" className={labelClass}>Full Name *</label>
-                <input
-                  type="text"
-                  id="contact-name"
-                  name="name"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  className={inputClass}
-                  placeholder="John Doe"
-                />
-              </div>
-              <div className="grid sm:grid-cols-2 gap-5">
-                <div>
-                  <label htmlFor="contact-email" className={labelClass}>Email *</label>
-                  <input
-                    type="email"
-                    id="contact-email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={inputClass}
-                    placeholder="john@example.com"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="contact-phone" className={labelClass}>Phone *</label>
-                  <input
-                    type="tel"
-                    id="contact-phone"
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className={inputClass}
-                    placeholder="+211 929 986 001"
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="contact-company" className={labelClass}>Company / Organization</label>
-                <input
-                  type="text"
-                  id="contact-company"
-                  name="company"
-                  value={formData.company}
-                  onChange={handleChange}
-                  className={inputClass}
-                  placeholder="Your company name"
-                />
-              </div>
-              <div>
-                <label htmlFor="contact-service" className={labelClass}>Service Required *</label>
-                <select
-                  id="contact-service"
-                  name="service"
-                  required
-                  value={formData.service}
-                  onChange={handleChange}
-                  className={`${inputClass} cursor-pointer`}
-                >
-                  <option value="">Select a service</option>
-                  {services.map((s) => (
-                    <option key={s.id} value={s.name} className="bg-white text-gray-900">
-                      {s.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label htmlFor="contact-message" className={labelClass}>Message / Requirements</label>
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  rows={4}
-                  value={formData.message}
-                  onChange={handleChange}
-                  className={`${inputClass} resize-none`}
-                  placeholder="Describe your requirements or project details..."
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full sm:w-auto px-8 py-4 bg-secondary text-white font-semibold rounded-lg hover:bg-secondary/90 transition-colors"
-              >
-                Submit Request
-              </button>
-            </form>
+            <RequestServiceForm
+              source="contact-section"
+              title="Request a Service"
+              variant="secondary"
+            />
           </div>
         </div>
       </div>

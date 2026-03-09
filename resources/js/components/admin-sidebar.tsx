@@ -25,19 +25,20 @@ const adminNavItems: NavItem[] = [
     { title: 'Services', href: '/services', icon: Briefcase },
     { title: 'Projects', href: '/projects', icon: FolderKanban },
     { title: 'Messages', href: '/messages', icon: Mail },
+    { title: 'Service requests', href: '/service-requests', icon: Mail },
     { title: 'Users', href: '/users', icon: Users },
     { title: 'Settings', href: '/settings', icon: Settings },
 ];
 
 export function AdminSidebar() {
     return (
-        <Sidebar collapsible="icon" variant="inset">
+        <Sidebar collapsible="icon" variant="inset" className="bg-primary-dark text-white">
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
                             <Link href="/dashboard" prefetch>
-                                <span className="font-semibold text-primary">
+                                <span className="font-semibold text-white">
                                     3K Admin
                                 </span>
                             </Link>

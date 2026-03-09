@@ -7,6 +7,7 @@ import GuestLayout from './layouts/GuestLayout';
 import '../css/app.css';
 
 import AboutPage from './pages/guest/about';
+import CareersPage from './pages/guest/careers';
 import ContactPage from './pages/guest/contacts';
 import Main from './pages/guest/main';
 import PrivacyPage from './pages/guest/privacy';
@@ -56,6 +57,7 @@ createRoot(root).render(
                             />
                             <Route path="/privacy" element={<PrivacyPage />} />
                             <Route path="/terms" element={<TermsPage />} />
+                            <Route path="/careers" element={<CareersPage />} />
                         </Route>
                     </Routes>
                 </ServicesProvider>

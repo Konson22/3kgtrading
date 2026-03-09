@@ -14,10 +14,10 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::query()->updateOrCreate(
-            ['email' => 'admin@example.com'],
+            ['email' => 'admin@3kgtrading.com'],
             [
                 'name' => 'Admin',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('123'),
                 'role' => 'admin',
                 'status' => 'active',
                 'email_verified_at' => now(),
@@ -25,10 +25,10 @@ class UserSeeder extends Seeder
         );
 
         User::query()->updateOrCreate(
-            ['email' => 'staff@example.com'],
+            ['email' => 'staff@3kgtrading.com'],
             [
                 'name' => 'Staff User',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('123'),
                 'role' => 'staff',
                 'status' => 'active',
                 'email_verified_at' => now(),
