@@ -31,12 +31,18 @@ class ContactRequestController extends Controller
             'message' => $validated['message'] ?? null,
         ]);
 
-        // Send notification email
-        $to = 'info@3kgtrading.com';
+        // Send notification email to admin
+        $adminEmail = 'info@3kgtrading.com';
 
-        Mail::html($this->buildHtmlBody($validated), function ($mail) use ($to, $validated) {
-            $mail->to($to)
+        Mail::html($this->buildHtmlBody($validated), function ($mail) use ($adminEmail, $validated) {
+            $mail->to($adminEmail)
                 ->subject('New service request from '.$validated['name']);
+        });
+
+        // Send confirmation email to user
+        Mail::html($this->buildUserConfirmationBody($validated), function ($mail) use ($validated) {
+            $mail->to($validated['email'])
+                ->subject('We have received your service request');
         });
 
         return response()->json(['success' => true]);
@@ -85,6 +91,29 @@ class ContactRequestController extends Controller
             .nl2br($safe($message))
             .'</p>';
 
+        $html .= '</div>';
+
+        return $html;
+    }
+
+    protected function buildUserConfirmationBody(array $data): string
+    {
+        $safe = static fn (?string $value): string => htmlspecialchars((string) ($value ?? ''), ENT_QUOTES, 'UTF-8');
+
+        $html = '<div style="font-family: system-ui, -apple-system, BlinkMacSystemFont, \'Segoe UI\', sans-serif; color:#111827; line-height:1.5;">';
+        $html .= '<h2 style="font-size:20px; margin:0 0 12px; color:#111827;">Thank you for your request</h2>';
+        $html .= '<p style="margin:0 0 16px; color:#4b5563;">Dear '.$safe($data['name'] ?? '').',</p>';
+        $html .= '<p style="margin:0 0 12px; color:#4b5563;">We have received your service request and our team will review it and get back to you as soon as possible.</p>';
+
+        $html .= '<p style="margin:0 0 8px; font-weight:600; color:#111827;">Summary of your request</p>';
+        $html .= '<ul style="margin:0 0 16px 18px; padding:0; color:#4b5563; font-size:14px;">';
+        $html .= '<li><strong>Service:</strong> '.$safe($data['service'] ?? '').'</li>';
+        $html .= '<li><strong>Phone:</strong> '.$safe($data['phone'] ?? '').'</li>';
+        $html .= '<li><strong>Company:</strong> '.$safe($data['company'] ?? '-').'</li>';
+        $html .= '</ul>';
+
+        $html .= '<p style="margin:0 0 4px; color:#4b5563;">If you did not submit this request, please ignore this email.</p>';
+        $html .= '<p style="margin:12px 0 0; color:#4b5563;">Best regards,<br />3K General Trading Ltd</p>';
         $html .= '</div>';
 
         return $html;

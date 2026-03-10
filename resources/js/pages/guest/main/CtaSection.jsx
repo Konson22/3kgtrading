@@ -23,11 +23,13 @@ export default function CtaSection() {
             {/* Background image */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: "url('/images/construction2.jpg')" }}
+                style={{
+                    backgroundImage: "url('/images/city.jpg')",
+                }}
                 aria-hidden
             />
             {/* Dark overlay for text contrast */}
-            <div className="absolute inset-0 bg-primary-dark/90" aria-hidden />
+            <div className="absolute inset-0 bg-primary-dark/70" aria-hidden />
             {/* Accent bar */}
             <div
                 className="absolute top-0 left-0 z-10 h-1 w-full bg-gradient-to-r from-primary via-primary/80 to-secondary"
@@ -36,7 +38,7 @@ export default function CtaSection() {
             {/* Grid */}
             <div className="absolute inset-0 z-10 opacity-[0.06]" aria-hidden />
             <div className="container-px relative z-20 mx-auto max-w-4xl px-4 text-center sm:px-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary sm:text-sm">
+                <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase sm:text-sm">
                     Start your project
                 </p>
                 <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
@@ -49,23 +51,10 @@ export default function CtaSection() {
                 </p>
                 <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/75 sm:text-base">
                     From water point management and meter installation to solid
-                    waste collection and construction—we deliver quality,
+                    waste collection and construction we deliver quality,
                     reliability, and clear communication at every step.
                 </p>
-                <ul className="mx-auto mt-6 flex max-w-xl flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/80 sm:gap-x-8">
-                    <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden />
-                        Free, no-obligation quote
-                    </li>
-                    <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden />
-                        Response within 24 hours
-                    </li>
-                    <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden />
-                        Experienced across South Sudan
-                    </li>
-                </ul>
+
                 <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5">
                     <Link
                         to="/request-service"

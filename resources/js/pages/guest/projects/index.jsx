@@ -1,4 +1,3 @@
-import React from 'react';
 import PageSecondaryHero from '../../../components/PageSecondaryHero';
 import { useProjects } from '../../../context/ProjectsContext';
 
@@ -28,9 +27,6 @@ export default function ProjectsPage() {
                             className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md sm:p-5"
                         >
                             <div className="flex items-start justify-between gap-3">
-                                <span className="rounded bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary sm:text-sm">
-                                    #{index + 1}
-                                </span>
                                 <span className="text-right text-sm font-semibold text-primary sm:text-base">
                                     {project.value} USD
                                 </span>
@@ -57,14 +53,11 @@ export default function ProjectsPage() {
             </section>
 
             {/* Table layout: desktop */}
-            <section className="container-px mx-auto max-w-6xl px-4 py-16 sm:px-6 hidden lg:block">
+            <section className="container-px mx-auto hidden max-w-6xl px-4 py-16 sm:px-6 lg:block">
                 <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
                     <table className="w-full border-collapse">
                         <thead>
                             <tr className="bg-primary text-white">
-                                <th className="p-4 text-left font-semibold">
-                                    S/N
-                                </th>
                                 <th className="p-4 text-left font-semibold">
                                     Project Name
                                 </th>
@@ -86,11 +79,8 @@ export default function ProjectsPage() {
                             {projects.map((project, index) => (
                                 <tr
                                     key={project.id}
-                                    className="border-b border-gray-200 transition-colors hover:bg-gray-50 last:border-b-0"
+                                    className="border-b border-gray-200 transition-colors last:border-b-0 hover:bg-gray-50"
                                 >
-                                    <td className="p-4 text-gray-600">
-                                        {index + 1}
-                                    </td>
                                     <td className="p-4 font-medium text-gray-900">
                                         {project.name}
                                     </td>

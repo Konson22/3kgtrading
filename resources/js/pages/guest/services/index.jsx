@@ -10,71 +10,43 @@ function slugify(str) {
         .replace(/[^a-z0-9-]/g, '');
 }
 
-function ServiceDetailCard({ service, index }) {
-    const imageFirst = index % 2 === 0;
+function ServiceDetailCard({ service }) {
     return (
-        <article className="group overflow-hidden rounded-xl border border-gray-100 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)] sm:rounded-2xl">
-            <div
-                className={`flex flex-col gap-0 lg:flex-row lg:gap-0 ${!imageFirst ? 'lg:flex-row-reverse' : ''}`}
-            >
-                {service.image && (
-                    <div className="relative aspect-[16/10] min-h-[180px] w-full flex-shrink-0 overflow-hidden sm:min-h-[220px] lg:aspect-auto lg:min-h-[280px] lg:w-[42%]">
-                        <img
-                            src={service.image}
-                            alt={service.name}
-                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                        />
-                    </div>
-                )}
-                <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-6 lg:p-8">
-                    <span className="mb-2 inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-wider text-primary uppercase sm:mb-3 sm:text-xs">
-                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 text-[9px] font-bold text-primary sm:h-6 sm:w-6 sm:text-[10px]">
-                            {String(index + 1).padStart(2, '0')}
-                        </span>
-                        Service
-                    </span>
-                    <h2 className="mb-3 font-display text-xl font-bold text-gray-900 sm:mb-4 sm:text-2xl lg:text-3xl">
-                        {service.name}
-                    </h2>
-                    <p className="mb-4 flex-1 text-sm leading-relaxed text-gray-600 sm:mb-6 sm:text-base">
-                        {service.description}
-                    </p>
-                    <div>
-                        <h3 className="mb-2 text-xs font-semibold tracking-wide text-gray-500 uppercase sm:mb-3 sm:text-sm">
-                            Key offerings
-                        </h3>
-                        <ul className="space-y-2 sm:space-y-2.5">
-                            {service.features.map((feature, i) => (
-                                <li
-                                    key={i}
-                                    className="flex items-start gap-2.5 text-sm text-gray-700 sm:gap-3 sm:text-base"
-                                >
-                                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-secondary" />
-                                    <span>{feature}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <Link
-                        to={`/services/${slugify(service.name)}`}
-                        className="mt-4 inline-flex w-fit items-center gap-2 text-xs font-semibold text-primary hover:underline sm:mt-6 sm:text-sm"
+        <article className="group overflow-hidden bg-white transition-all duration-300">
+            <div className="relative aspect-[16/10] min-h-[180px] w-full flex-shrink-0 overflow-hidden rounded-md sm:min-h-[220px]">
+                <img
+                    src={service.image}
+                    alt={service.name}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-black/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            </div>
+            <div className="flex min-w-0 flex-1 flex-col pt-4">
+                <h2 className="mb-2 font-display text-xl font-bold text-gray-900 sm:mb-3 sm:text-2xl lg:text-3xl">
+                    {service.name}
+                </h2>
+                <p className="mb-4 line-clamp-5 flex-1 text-sm leading-relaxed text-gray-600 sm:mb-5 sm:text-base">
+                    {service.description}
+                </p>
+                <Link
+                    to={`/services/${slugify(service.name)}`}
+                    className="mt-4 inline-flex w-fit items-center gap-2 text-xs font-semibold text-primary hover:underline sm:mt-3 sm:text-sm"
+                >
+                    Learn more
+                    <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
                     >
-                        Learn more
-                        <svg
-                            className="h-4 w-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M17 8l4 4m0 0l-4 4m4-4H3"
-                            />
-                        </svg>
-                    </Link>
-                </div>
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                    </svg>
+                </Link>
             </div>
         </article>
     );
@@ -110,13 +82,9 @@ export default function ServicesPage() {
                         aria-hidden
                     />
                 </div>
-                <div className="space-y-6 sm:space-y-8 lg:space-y-10">
-                    {services.map((service, index) => (
-                        <ServiceDetailCard
-                            key={service.id}
-                            service={service}
-                            index={index}
-                        />
+                <div className="grid gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-10">
+                    {services.map((service) => (
+                        <ServiceDetailCard key={service.id} service={service} />
                     ))}
                 </div>
             </section>

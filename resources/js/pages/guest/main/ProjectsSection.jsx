@@ -35,17 +35,17 @@ export default function ProjectsSection() {
                         {ongoingProjects.map((project) => (
                             <article
                                 key={project.id}
-                                className="group flex flex-col overflow-hidden rounded-2xl border border-primary/20 bg-white shadow-sm transition-all duration-300 hover:border-primary/40 hover:shadow-lg sm:flex-row"
+                                className="group flex flex-col overflow-hidden rounded-2xl border border-primary/20 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg sm:flex-row"
                             >
-                                <div className="relative h-48 w-full shrink-0 sm:h-auto sm:min-h-[200px] sm:w-56 lg:w-64">
+                                <div className="relative h-48 w-full shrink-0 overflow-hidden sm:h-auto sm:min-h-[200px] sm:w-56 lg:w-64">
                                     <img
                                         src={project.image}
                                         alt={`${project.name} project`}
-                                        className="absolute inset-0 h-full w-full object-cover"
+                                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                                     />
                                 </div>
-                                <div className="flex flex-1 flex-col border-b border-gray-100 p-6 sm:border-r sm:border-b-0 sm:border-gray-100 sm:p-8">
-                                    <span className="text-xs font-semibold tracking-wider text-secondary uppercase">
+                                <div className="flex flex-1 flex-col border-b border-gray-100 p-6 sm:border-b-0 sm:border-r sm:border-gray-100 sm:p-8">
+                                    <span className="text-xs font-semibold uppercase tracking-wider text-secondary">
                                         {project.client}
                                     </span>
                                     <h3 className="mt-2 font-display text-xl font-bold text-gray-900 sm:text-2xl">
@@ -54,24 +54,16 @@ export default function ProjectsSection() {
                                     <p className="mt-3 text-sm leading-relaxed text-gray-600 sm:text-base">
                                         {project.description}
                                     </p>
-                                </div>
-                                <div className="flex shrink-0 flex-row gap-6 border-t border-gray-100 bg-gray-50/80 p-6 sm:min-w-[200px] sm:flex-col sm:gap-4 sm:border-t-0 sm:border-l-0 sm:px-8 sm:py-8">
-                                    <div>
-                                        <span className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                                            Value (USD)
-                                        </span>
-                                        <p className="mt-1 font-bold text-primary">
-                                            {project.value}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <span className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                                            Duration
-                                        </span>
-                                        <p className="mt-1 font-medium text-gray-700">
-                                            {project.startDate} –{' '}
-                                            {project.endDate}
-                                        </p>
+                                    <div className="mt-4 flex flex-col gap-3 text-xs text-gray-500 sm:flex-row sm:items-center sm:justify-between sm:text-sm">
+                                        <div className="flex items-center gap-2">
+                                            <span className="inline-flex h-2 w-2 rounded-full bg-secondary" aria-hidden />
+                                            <span>
+                                                {project.startDate} – {project.endDate}
+                                            </span>
+                                        </div>
+                                        <div className="font-semibold text-primary">
+                                            {project.value} USD
+                                        </div>
                                     </div>
                                 </div>
                             </article>

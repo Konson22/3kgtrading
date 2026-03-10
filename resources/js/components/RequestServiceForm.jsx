@@ -1,27 +1,27 @@
-import React, { useState } from "react";
-import { useServices } from "../context/ServicesContext";
+import React, { useState } from 'react';
+import { useServices } from '../context/ServicesContext';
 
 const inputClass =
-    "w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:border-transparent outline-none transition-colors";
-const labelClass = "block text-sm font-medium text-gray-700 mb-1";
+    'w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:border-transparent outline-none transition-colors';
+const labelClass = 'block text-sm font-medium text-gray-700 mb-1';
 
 export default function RequestServiceForm({
-    source = "contact-section",
-    title = "Request a Service",
-    variant = "secondary",
+    source = 'contact-section',
+    title = 'Request a Service',
+    variant = 'secondary',
 }) {
     const { services } = useServices();
     const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        service: "",
-        message: "",
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        service: '',
+        message: '',
     });
     const [submitted, setSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [error, setError] = useState("");
+    const [error, setError] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -30,16 +30,16 @@ export default function RequestServiceForm({
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError("");
+        setError('');
         setIsSubmitting(true);
 
         try {
-            const response = await fetch("/api/contact-request", {
-                method: "POST",
+            const response = await fetch('/api/contact-request', {
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                    "X-Requested-With": "XMLHttpRequest",
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
                 },
                 body: JSON.stringify({
                     ...formData,
@@ -48,14 +48,14 @@ export default function RequestServiceForm({
             });
 
             if (!response.ok) {
-                throw new Error("Failed to submit request. Please try again.");
+                throw new Error('Failed to submit request. Please try again.');
             }
 
             setSubmitted(true);
         } catch (err) {
             console.error(err);
             setError(
-                "Something went wrong while sending your request. Please try again."
+                'Something went wrong while sending your request. Please try again.',
             );
         } finally {
             setIsSubmitting(false);
@@ -64,10 +64,10 @@ export default function RequestServiceForm({
 
     if (submitted) {
         return (
-            <div className="p-10 rounded-2xl bg-gray-50 border border-secondary/30 text-center">
-                <div className="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-6">
+            <div className="rounded-2xl border border-secondary/30 bg-gray-50 p-10 text-center">
+                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-secondary/20">
                     <svg
-                        className="w-8 h-8 text-secondary"
+                        className="h-8 w-8 text-secondary"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -80,13 +80,15 @@ export default function RequestServiceForm({
                         />
                     </svg>
                 </div>
-                <h3 className="text-xl font-bold mb-2">Thank You</h3>
-                <p className="text-gray-700 mb-4">
-                    We have received your request and will get back to you shortly.
+                <h3 className="mb-2 text-xl font-bold">Thank You</h3>
+                <p className="mb-4 text-gray-700">
+                    We have received your request and will get back to you
+                    shortly.
                 </p>
-                <p className="text-gray-600 text-sm">
-                    We&apos;ll contact you at{" "}
-                    <strong className="text-gray-900">{formData.email}</strong> or{" "}
+                <p className="text-sm text-gray-600">
+                    We&apos;ll contact you at{' '}
+                    <strong className="text-gray-900">{formData.email}</strong>{' '}
+                    or{' '}
                     <strong className="text-gray-900">{formData.phone}</strong>.
                 </p>
             </div>
@@ -94,20 +96,20 @@ export default function RequestServiceForm({
     }
 
     const buttonBase =
-        "w-full sm:w-auto px-8 py-4 font-semibold rounded-lg disabled:opacity-70 disabled:cursor-not-allowed transition-colors";
+        'w-full sm:w-auto px-8 py-4 font-semibold rounded-lg disabled:opacity-70 disabled:cursor-not-allowed transition-colors';
     const buttonVariantClasses =
-        variant === "primary"
-            ? "bg-primary text-white hover:bg-primary/90"
-            : "bg-secondary text-white hover:bg-secondary/90";
+        variant === 'primary'
+            ? 'bg-primary text-white hover:bg-primary/90'
+            : 'bg-primary text-white hover:bg-primary/90';
 
     return (
         <form
             onSubmit={handleSubmit}
-            className="p-8 rounded-2xl bg-gray-50 border border-gray-200 space-y-5"
+            className="space-y-5 rounded-2xl border border-gray-200 bg-gray-50 p-8"
         >
-            <h3 className="text-xl font-bold mb-6">{title}</h3>
+            <h3 className="mb-6 text-xl font-bold">{title}</h3>
             {error && (
-                <p className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-md px-3 py-2">
+                <p className="rounded-md border border-red-100 bg-red-50 px-3 py-2 text-sm text-red-600">
                     {error}
                 </p>
             )}
@@ -126,7 +128,7 @@ export default function RequestServiceForm({
                     placeholder="John Doe"
                 />
             </div>
-            <div className="grid sm:grid-cols-2 gap-5">
+            <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                     <label htmlFor="request-email" className={labelClass}>
                         Email *
@@ -215,9 +217,8 @@ export default function RequestServiceForm({
                 disabled={isSubmitting}
                 className={`${buttonBase} ${buttonVariantClasses}`}
             >
-                {isSubmitting ? "Sending..." : "Submit Request"}
+                {isSubmitting ? 'Sending...' : 'Submit Request'}
             </button>
         </form>
     );
 }
-
