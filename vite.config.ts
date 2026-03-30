@@ -5,12 +5,15 @@ import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+    resolve: {
+        // Prefer .jsx over .tsx for extensionless imports (e.g. after renaming a file to .jsx).
+        extensions: ['.jsx', '.tsx', '.ts', '.js', '.mjs', '.mts', '.json'],
+    },
     plugins: [
         laravel({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.tsx',
-                'resources/js/guest.tsx',
             ],
             ssr: 'resources/js/ssr.tsx',
             refresh: true,
@@ -30,9 +33,9 @@ export default defineConfig({
     },
     server: {
         host: 'localhost',
-        port: 5173,
+        port: 3000,
         strictPort: true,
         cors: true,
-        origin: 'http://localhost:5173',
+        origin: 'http://localhost:3000',
     },
 });

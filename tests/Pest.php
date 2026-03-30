@@ -41,7 +41,18 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function createBusinessWithBranch(): \App\Models\Branch
 {
-    // ..
+    $business = \App\Models\Business::query()->create([
+        'name' => 'Test Business',
+        'category' => 'retail',
+        'slogan' => 'Test slogan',
+    ]);
+
+    return \App\Models\Branch::query()->create([
+        'business_id' => $business->id,
+        'name' => 'Main',
+        'code' => 'TSTMAIN',
+        'is_active' => true,
+    ]);
 }

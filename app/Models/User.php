@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -22,8 +23,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
         'status',
+        'branch_id',
+        'department_id',
+        'role_id',
     ];
 
     /**
@@ -50,5 +53,35 @@ class User extends Authenticatable
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
         ];
+    }
+
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role?->slug === 'admin';
+    }
+
+    public function isManager(): bool
+    {
+        return $this->role?->slug === 'manager';
+    }
+
+    public function isCashier(): bool
+    {
+        return $this->role?->slug === 'cashier';
     }
 }

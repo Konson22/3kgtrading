@@ -1,23 +1,46 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\MessageController;
-use App\Http\Controllers\Admin\ProjectController;
-use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\Admin\ServiceRequestController;
-use App\Http\Controllers\Admin\SettingsController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\PortalPageController;
+use App\Http\Controllers\Branch\PortalPageController as BranchPortalPageController;
+use App\Http\Controllers\DashboardRedirectController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('dashboard', DashboardRedirectController::class)->name('dashboard');
 
-Route::resource('services', ServiceController::class)->names('admin.services')->except(['show']);
-Route::resource('projects', ProjectController::class)->names('admin.projects')->except(['show']);
+Route::get('modules/{slug}', function (Request $request, string $slug) {
+    $toModule = match ($slug) {
+        'pos', 'inventory', 'reports', 'branches', 'users' => $slug,
+        'documents' => 'invoices',
+        'purchasing' => 'suppliers',
+        'administration' => 'settings',
+        'offline', 'devices', 'notifications' => 'settings',
+        default => 'dashboard',
+    };
 
-Route::get('messages', [MessageController::class, 'index'])->name('admin.messages.index');
-Route::get('service-requests', [ServiceRequestController::class, 'index'])->name('admin.service-requests.index');
+    $prefix = $request->user()->isAdmin() ? 'admin' : 'branch';
+    if (! $request->user()->isAdmin() && in_array($toModule, ['branches', 'users'], true)) {
+        return redirect("/{$prefix}/dashboard");
+    }
 
-Route::resource('users', UserController::class)->names('admin.users')->except(['show']);
+    return redirect("/{$prefix}/{$toModule}");
+})->middleware(['auth', 'verified', 'business.setup', 'staff.branch'])
+    ->where('slug', 'pos|inventory|documents|purchasing|reports|users|branches|offline|devices|notifications|administration');
 
-Route::get('settings', [SettingsController::class, 'edit'])->name('admin.settings.edit');
-Route::put('settings', [SettingsController::class, 'update'])->name('admin.settings.update');
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['portal.admin'])
+    ->group(function () {
+        Route::get('{module}', [PortalPageController::class, 'show'])
+            ->where('module', 'dashboard|pos|inventory|customers|suppliers|quotations|invoices|payments|receipts|reports|branches|users|settings')
+            ->name('portal');
+    });
+
+Route::prefix('branch')
+    ->name('branch.')
+    ->middleware(['portal.branch'])
+    ->group(function () {
+        Route::get('{module}', [BranchPortalPageController::class, 'show'])
+            ->where('module', 'dashboard|pos|inventory|customers|suppliers|quotations|invoices|payments|receipts|reports|settings')
+            ->name('portal');
+    });

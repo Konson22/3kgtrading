@@ -14,6 +14,7 @@ test('two factor settings page can be rendered', function () {
         'confirmPassword' => true,
     ]);
 
+    createBusinessWithBranch();
     $user = User::factory()->create();
 
     $this->actingAs($user)
@@ -30,6 +31,7 @@ test('two factor settings page requires password confirmation when enabled', fun
         $this->markTestSkipped('Two-factor authentication is not enabled.');
     }
 
+    createBusinessWithBranch();
     $user = User::factory()->create();
 
     Features::twoFactorAuthentication([
@@ -48,6 +50,7 @@ test('two factor settings page does not requires password confirmation when disa
         $this->markTestSkipped('Two-factor authentication is not enabled.');
     }
 
+    createBusinessWithBranch();
     $user = User::factory()->create();
 
     Features::twoFactorAuthentication([
@@ -70,6 +73,7 @@ test('two factor settings page returns forbidden response when two factor is dis
 
     config(['fortify.features' => []]);
 
+    createBusinessWithBranch();
     $user = User::factory()->create();
 
     $this->actingAs($user)

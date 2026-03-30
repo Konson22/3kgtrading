@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ContactRequestController;
+use App\Http\Controllers\CurrentBranchController;
+use App\Http\Controllers\OnboardingController;
+use App\Models\Business;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,48 +18,64 @@ if (str_starts_with($baseDomain, 'admin.')) {
 $adminDomain = 'admin.'.$baseDomain;
 
 // Root route behaves differently depending on host:
-// - admin.[baseDomain]: send admins to admin dashboard, others to login
-// - base domain / anything else: render guest SPA entry
+// - admin.[baseDomain]: send admins to dashboard, others to login
+// - base domain: send authenticated users to dashboard, others to login
 Route::get('/', function (Request $request) use ($adminDomain) {
     if ($request->getHost() === $adminDomain) {
-        if ($request->user()?->role === 'admin') {
-            return redirect()->route('admin.dashboard');
+        if ($request->user()?->isAdmin()) {
+            if (! Business::query()->exists()) {
+                return redirect()->route('onboarding.business');
+            }
+
+            return redirect()->route('dashboard');
         }
 
         return redirect()->to('/login');
     }
 
-    return view('guest');
+    if ($request->user()) {
+        if (! Business::query()->exists()) {
+            return redirect()->route('onboarding.business');
+        }
+
+        return redirect()->route('dashboard');
+    }
+
+    return redirect()->to('/login');
 })->name('home');
 
-// Admin panel on admin.[baseDomain] only
-Route::domain($adminDomain)->group(function () {
-    Route::middleware(['auth', 'verified'])->group(function () {
-        require __DIR__.'/admin.php';
-    });
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('onboarding/business', [OnboardingController::class, 'create'])
+        ->name('onboarding.business');
+    Route::post('onboarding/business', [OnboardingController::class, 'store'])
+        ->name('onboarding.business.store');
 });
 
-// Public / guest site + user settings on the base domain
-Route::domain($baseDomain)->group(function () {
-    // API-like endpoints for the public site
+// Authenticated app (dashboard, POS, etc.) — registered globally so /dashboard works when
+// APP_URL is an IP or hostname without a separate admin subdomain (avoids post-login 404).
+Route::middleware(['auth', 'verified', 'business.setup', 'staff.branch'])->group(function () {
+    Route::post('context/branch', [CurrentBranchController::class, 'update'])
+        ->name('context.branch');
+    require __DIR__.'/admin.php';
+});
+
+// Public API + user settings on the base domain
+Route::domain($baseDomain)->middleware(['business.setup'])->group(function () {
     Route::post('api/contact-request', ContactRequestController::class)
         ->withoutMiddleware([VerifyCsrfToken::class]);
 
-    // Authenticated user settings routes (profile, password, etc.)
     require __DIR__.'/settings.php';
-
-    // Guest SPA catch-all – everything else goes to the React guest app
-    Route::get('/{any?}', function () {
-        return view('guest');
-    })->where('any', '^(?!api|dashboard|admin|expert|user|login|register|password|verification|user-password|settings).*$')
-      ->name('guest');
 });
 
 // Fallback: keep admin subdomain users on admin area, others 404
 Route::fallback(function (Request $request) use ($adminDomain) {
     if ($request->getHost() === $adminDomain) {
-        if ($request->user()?->role === 'admin') {
-            return redirect()->route('admin.dashboard');
+        if ($request->user()?->isAdmin()) {
+            if (! Business::query()->exists()) {
+                return redirect()->route('onboarding.business');
+            }
+
+            return redirect()->route('dashboard');
         }
 
         return redirect()->to('/login');

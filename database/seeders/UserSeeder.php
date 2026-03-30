@@ -2,37 +2,35 @@
 
 namespace Database\Seeders;
 
+use App\Models\Branch;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        User::query()->updateOrCreate(
-            ['email' => 'admin@3kgtrading.com'],
-            [
-                'name' => 'Admin',
-                'password' => Hash::make('123'),
-                'role' => 'admin',
-                'status' => 'active',
-                'email_verified_at' => now(),
-            ]
-        );
+        $adminRole = Role::query()->where('slug', 'admin')->first();
+
+        if (! $adminRole) {
+            return;
+        }
+
+        $branch = Branch::query()->where('code', 'MAIN')->first();
 
         User::query()->updateOrCreate(
-            ['email' => 'staff@3kgtrading.com'],
+            ['email' => 'admin@gmail.com'],
             [
-                'name' => 'Staff User',
+                'name' => 'Administrator',
                 'password' => Hash::make('123'),
-                'role' => 'staff',
                 'status' => 'active',
                 'email_verified_at' => now(),
-            ]
+                'department_id' => $adminRole->department_id,
+                'role_id' => $adminRole->id,
+                'branch_id' => $branch?->id,
+            ],
         );
     }
 }

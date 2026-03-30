@@ -7,12 +7,17 @@ import { initializeTheme } from './hooks/use-appearance';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
+const pages = {
+    ...import.meta.glob('./pages/**/*.jsx'),
+    ...import.meta.glob('./pages/**/*.tsx'),
+};
+
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
     resolve: (name) =>
         resolvePageComponent(
-            `./pages/${name}.tsx`,
-            import.meta.glob('./pages/**/*.tsx'),
+            [`./pages/${name}.tsx`, `./pages/${name}.jsx`],
+            pages,
         ),
     setup({ el, App, props }) {
         const root = createRoot(el);

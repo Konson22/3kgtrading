@@ -1,196 +1,224 @@
-Perfect 👌 let’s build this like a **professional corporate website proposal** you can confidently present to 3K.
+You are a senior full-stack engineer. Build a production-ready web-based POS and business management system for retail shops and pharmacies with multi-branch support.
 
-I’ll structure this into 5 complete sections:
+## Tech Stack
 
-1. ✅ New Sitemap
-2. ✅ Professionally Rewritten Website Content
-3. ✅ Homepage Wireframe Structure
-4. ✅ Recommended Tech Stack
-5. ✅ A Ready-to-Send Pitch Proposal
-
----
-
-# 1️⃣ NEW COMPLETE SITEMAP STRUCTURE
-
-### 🔹 Main Navigation
-
-* Home
-* About Us
-* Services
-
-  * Financial Management
-  * General Construction
-  * Property & Real Estate Management
-  * Small Business Consultancy
-* Projects
-* Clients & Partners
-* Careers
-* News & Updates
-* Contact Us
-* Download Company Profile (CTA button in header)
+- Backend: Node.js (Express)
+- Frontend: React + Tailwind CSS
+- Database: PostgreSQL
+- API: RESTful
 
 ---
 
-### 🔹 Footer Structure
+## Core Requirements
 
-* Quick Links
-* Our Services
-* Office Location
-* Contact Information
-* Social Media
-* Privacy Policy
-* Terms & Conditions
+The system must support:
 
----
-
-# 2️⃣ PROFESSIONALLY REWRITTEN WEBSITE CONTENT
-
-Now I’ll rewrite everything in a corporate tone suitable for government & NGO clients.
+- Multi-branch operations
+- Role-based access (Admin, Manager, Cashier)
+- POS sales
+- Inventory management
+- Quotations, invoices, payments, receipts
+- Reports and analytics
 
 ---
 
-## 🏠 HOME PAGE CONTENT
+## Modules & Pages
 
-### 🔷 HERO SECTION
+### 1. Dashboard
 
-**Headline:**
-
-> Delivering Integrated Construction, Financial & Property Solutions in South Sudan
-
-**Subheadline:**
-
-> 3K General Trading Co. Ltd is a trusted multi-service provider delivering high-quality solutions to government institutions, NGOs, and private sector organizations across South Sudan.
-
-**Buttons:**
-
-* Request a Quote
-* View Our Projects
+- Show KPIs: total sales, revenue per branch, low stock alerts, expiring products
+- Charts for sales trends
 
 ---
 
-### 🔷 ABOUT SUMMARY SECTION
+### 2. POS (Point of Sale)
 
-**Who We Are**
-
-3K General Trading Co. Ltd is a fully registered and compliant multi-service company based in Juba, South Sudan. We specialize in construction, financial management, property management, and business consultancy services.
-
-Our commitment to professionalism, accountability, and quality delivery has made us a reliable partner for both public and private sector clients.
-
----
-
-### 🔷 OUR CORE SERVICES
-
-#### 1️⃣ Financial Management
-
-We provide structured financial management solutions that promote transparency, accountability, and regulatory compliance.
-
-#### 2️⃣ General Construction
-
-We deliver high-quality construction and infrastructure projects with strict adherence to safety and engineering standards.
-
-#### 3️⃣ Property & Real Estate Management
-
-We offer professional property brokerage, rent management, and real estate advisory services.
-
-#### 4️⃣ Small Business Consultancy
-
-We support entrepreneurs and institutions with strategic planning, operational systems, and business development solutions.
+- Fast checkout interface
+- Add products via search or barcode
+- Cart system
+- Select customer
+- Accept multiple payment methods (cash, mobile money, bank)
+- Generate receipt after payment
 
 ---
 
-### 🔷 WHY CHOOSE 3K
+### 3. Inventory Management
 
-* Proven experience across multiple sectors
-* Strong compliance and governance standards
-* Dedicated professional team
-* Commitment to quality and timely delivery
-* Deep understanding of local market conditions
+#### Products
 
----
+- CRUD products
+- Categories
+- Barcode support
 
-### 🔷 STATISTICS SECTION
+#### Stock
 
-* 10+ Years Experience
-* 50+ Completed Projects
-* 30+ Skilled Professionals
-* 100+ Satisfied Clients
+- Track stock per branch
+- Stock adjustments
 
-(You can adjust numbers after confirming with them.)
+#### Transfers
 
----
+- Transfer stock between branches
 
-### 🔷 CALL TO ACTION
+#### Pharmacy Features
 
-> Ready to work with a reliable partner?
-> 👉 Contact Us Today
+- Batch numbers
+- Expiry date tracking
+- Expiring soon alerts
 
 ---
 
-# 3️⃣ HOMEPAGE WIREFRAME STRUCTURE (LAYOUT PLAN)
+### 4. Customers & Suppliers
 
-Here’s how I would structure it visually:
+#### Customers
 
----
+- CRUD customers
+- View purchase history
+- Track outstanding balances
 
-### 🔝 SECTION 1 — Sticky Header
+#### Suppliers
 
-Logo | Menu | Download Profile | Contact Button
-
----
-
-### 🟦 SECTION 2 — Hero (Full Width Image)
-
-Large background image (construction site or office)
-Headline
-Subheadline
-Two CTA buttons
+- CRUD suppliers
 
 ---
 
-### 🟩 SECTION 3 — About Summary (2 Columns)
+### 5. Quotations
 
-Left: Image
-Right: Text + “Read More”
-
----
-
-### 🟨 SECTION 4 — Services (Grid Layout)
-
-4 cards with:
-Icon
-Title
-Short description
-“Learn More”
+- Create quotation with items
+- Set expiry date
+- Status tracking
+- Convert quotation to invoice
 
 ---
 
-### 🟧 SECTION 5 — Projects Preview
+### 6. Invoices
 
-3 featured projects
-Image + short description
-“View All Projects”
-
----
-
-### 🟪 SECTION 6 — Why Choose Us
-
-Icon-based bullet points
+- Create invoice (manual or from quotation)
+- Track status (draft, paid, partial, overdue)
+- Track total and paid amounts
+- Due dates
 
 ---
 
-### 🟫 SECTION 7 — Statistics Counter
+### 7. Payments
 
-Animated numbers
-
----
-
-### 🟥 SECTION 8 — Clients & Partners Logos
+- Record payments against invoices
+- Support partial payments
+- Payment methods: cash, bank, mobile money
 
 ---
 
-### ⬛ SECTION 9 — Footer
+### 8. Receipts
 
-Contact info
-Address
-Social media
-Quick links
+- Auto-generate after payment
+- Printable format
+
+---
+
+### 9. Reports
+
+- Sales reports (daily, monthly, per branch)
+- Inventory reports
+- Financial reports (payments, outstanding invoices)
+
+---
+
+### 10. Multi-Branch Management
+
+- CRUD branches
+- Assign users to branches
+- Track branch-level data
+
+---
+
+### 11. User & Role Management
+
+- Users: Admin, Manager, Cashier
+- Role-based permissions
+
+---
+
+### 12. Settings
+
+- Business info
+- Document formats (invoice, receipt)
+- Payment methods
+- Numbering system (e.g., INV-JUB-0001)
+
+---
+
+## Database Design Requirements
+
+Include tables for:
+
+- branches
+- users
+- roles
+- products
+- stock (per branch)
+- customers
+- suppliers
+- quotations & quotation_items
+- invoices & invoice_items
+- payments
+- receipts
+
+Rules:
+
+- Every transactional record must include branch_id
+- Stock reduces only when invoice is confirmed, not quotation
+- Payments update invoice paid_amount and status
+
+---
+
+## API Requirements
+
+Create REST endpoints for all modules:
+
+- Auth (login/register)
+- Products, stock, transfers
+- Customers, suppliers
+- Quotations → convert to invoice
+- Invoices → payments
+- Reports
+
+---
+
+## Frontend Requirements
+
+- Clean dashboard UI
+
+- Dedicated POS screen (fast and minimal)
+
+- Sidebar navigation:
+  Dashboard, POS, Inventory, Customers, Suppliers, Quotations, Invoices, Payments, Receipts, Reports, Branches, Users, Settings
+
+- Use reusable components
+
+- Use forms with validation
+
+- Use tables with filters/search
+
+---
+
+## Additional Requirements
+
+- Use JWT authentication
+- Implement role-based authorization
+- Ensure responsive design
+- Add error handling and validation
+- Structure code for scalability
+
+---
+
+## Deliverables
+
+1. Backend folder structure
+2. Frontend folder structure
+3. Database schema (SQL)
+4. API routes
+5. Sample UI pages (React components)
+6. Instructions to run locally
+
+---
+
+Focus on clean architecture, scalability, and real-world usability for retail and pharmacy businesses.

@@ -4,6 +4,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 test('password update page is displayed', function () {
+    createBusinessWithBranch();
     $user = User::factory()->create();
 
     $response = $this
@@ -14,6 +15,7 @@ test('password update page is displayed', function () {
 });
 
 test('password can be updated', function () {
+    createBusinessWithBranch();
     $user = User::factory()->create();
 
     $response = $this
@@ -33,6 +35,7 @@ test('password can be updated', function () {
 });
 
 test('correct password must be provided to update password', function () {
+    createBusinessWithBranch();
     $user = User::factory()->create();
 
     $response = $this
