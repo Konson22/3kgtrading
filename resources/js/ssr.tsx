@@ -5,17 +5,15 @@ import ReactDOMServer from 'react-dom/server';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
-const pagesTsx = import.meta.glob('./pages/**/*.tsx');
-const pagesJsx = import.meta.glob('./pages/**/*.jsx');
-
 createServer((page) =>
     createInertiaApp({
         page,
         render: ReactDOMServer.renderToString,
         title: (title) => (title ? `${title} - ${appName}` : appName),
         resolve: (name) =>
-            resolvePageComponent(`./pages/${name}.tsx`, pagesTsx).catch(() =>
-                resolvePageComponent(`./pages/${name}.jsx`, pagesJsx),
+            resolvePageComponent(
+                `./pages/${name}.tsx`,
+                import.meta.glob('./pages/**/*.tsx'),
             ),
         setup: ({ App, props }) => {
             return <App {...props} />;

@@ -73,9 +73,7 @@ return [
     |
     */
 
-    'home' => env('ADMIN_URL')
-        ? rtrim(env('ADMIN_URL'), '/').'/dashboard'
-        : '/dashboard',
+    'home' => '/settings/profile',
 
     /*
     |--------------------------------------------------------------------------

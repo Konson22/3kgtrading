@@ -20,13 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleAppearance::class,
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
-        ]);
-
-        $middleware->alias([
-            'business.setup' => \App\Http\Middleware\EnsureBusinessSetupComplete::class,
-            'staff.branch' => \App\Http\Middleware\EnsureStaffHasBranch::class,
-            'portal.admin' => \App\Http\Middleware\EnsureAdminPortal::class,
-            'portal.branch' => \App\Http\Middleware\EnsureBranchPortal::class,
+            \App\Http\Middleware\SecurityHeaders::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

@@ -34,7 +34,7 @@ import { cn, toUrl } from '@/lib/utils';
 import type { BreadcrumbItem, NavItem } from '@/types';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
-import { dashboard } from '@/routes';
+import { edit } from '@/routes/profile';
 
 type Props = {
     breadcrumbs?: BreadcrumbItem[];
@@ -42,8 +42,8 @@ type Props = {
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
-        href: dashboard(),
+        title: 'Settings',
+        href: edit(),
         icon: LayoutGrid,
     },
 ];

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+    <url>
+    <loc>http://milesglobal.local/services/general-construction</loc>
+    <image:image>
+    <image:loc>http://milesglobal.local/images/services/general-construction.jpg</image:loc>
+    <image:caption>General Construction</image:caption>
+</image:image>
+        </url>
+    <url>
+    <loc>http://milesglobal.local/services/financial-management</loc>
+    <image:image>
+    <image:loc>http://milesglobal.local/images/services/financial-management.jpg</image:loc>
+    <image:caption>Financial Management</image:caption>
+</image:image>
+        </url>
+    <url>
+    <loc>http://milesglobal.local/services/small-business-consultancy</loc>
+    <image:image>
+    <image:loc>http://milesglobal.local/images/services/small-business-consultancy.jpg</image:loc>
+    <image:caption>Small Business Consultancy</image:caption>
+</image:image>
+        </url>
+    <url>
+    <loc>http://milesglobal.local/services/property-management</loc>
+    <image:image>
+    <image:loc>http://milesglobal.local/images/services/property-real-estate.jpg</image:loc>
+    <image:caption>Property Management</image:caption>
+</image:image>
+        </url>
+    <url>
+    <loc>http://milesglobal.local/projects/management-of-water-points-and-revenue-collection</loc>
+    <image:image>
+    <image:loc>http://milesglobal.local/images/gallery/ssuwc-revenue-collection.png</image:loc>
+    <image:caption>Management of water points and Revenue collection</image:caption>
+</image:image>
+        </url>
+    <url>
+    <loc>http://milesglobal.local/projects/water-meters-connection</loc>
+    <image:image>
+    <image:loc>http://milesglobal.local/images/gallery/ssuwc-revenue-collection.png</image:loc>
+    <image:caption>Water meters connection</image:caption>
+</image:image>
+        </url>
+    <url>
+    <loc>http://milesglobal.local/projects/water-meter-installation-repair-and-maintenance</loc>
+    <image:image>
+    <image:loc>http://milesglobal.local/images/gallery/3K-General-Trading-team3.png</image:loc>
+    <image:caption>Water Meter installation, repair and maintenance</image:caption>
+</image:image>
+        </url>
+    <url>
+    <loc>http://milesglobal.local/projects/management-of-solid-waste</loc>
+    <image:image>
+    <image:loc>http://milesglobal.local/images/general-construction2.jpg</image:loc>
+    <image:caption>Management of Solid Waste</image:caption>
+</image:image>
+        </url>
+    <url>
+    <loc>http://milesglobal.local/projects/construction-of-vip-toilets-pit-latrines-installation-of-small-water-distribution-system-and-network</loc>
+    <image:image>
+    <image:loc>http://milesglobal.local/images/contruction-building.png</image:loc>
+    <image:caption>Construction of VIP toilets, Pit latrines, Installation of small water distribution system and network</image:caption>
+</image:image>
+        </url>
+    <url>
+    <loc>http://milesglobal.local/projects/maintenance-of-water-facilities</loc>
+    <image:image>
+    <image:loc>http://milesglobal.local/images/gallery/ssuwc-revenue-collection.png</image:loc>
+    <image:caption>Maintenance of water facilities</image:caption>
+</image:image>
+        </url>
+    <url>
+    <loc>http://milesglobal.local/projects/subcontract-for-installation-of-water-pipeline-for-kator-residential-area</loc>
+    <image:image>
+    <image:loc>http://milesglobal.local/images/building.jpg</image:loc>
+    <image:caption>Subcontract for Installation of water Pipeline for Kator residential area</image:caption>
+</image:image>
+        </url>
+</urlset>

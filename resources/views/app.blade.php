@@ -3,6 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex, nofollow">
+
+        @include('partials.tracking-scripts')
 
         {{-- Inline script to detect system dark mode preference and apply it immediately --}}
         <script>
@@ -41,10 +44,13 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
         @viteReactRefresh
-        @vite(['resources/css/app.css', 'resources/js/app.tsx'])
+        @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
         @inertiaHead
     </head>
     <body class="font-sans antialiased">
+        @if (config('seo.gtm_container_id'))
+            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ config('seo.gtm_container_id') }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        @endif
         @inertia
     </body>
 </html>

@@ -87,6 +87,13 @@ export const footer = {
   termsConditions: "Terms & Conditions",
 };
 
+export const social = {
+  facebook: "https://www.facebook.com/profile.php?id=61588870990982",
+  linkedin: "https://www.linkedin.com/company/3kgtrading",
+  twitter: "https://twitter.com/3kgtrading",
+  instagram: "https://www.instagram.com/3kgtrading",
+};
+
 export const contact = {
   address:
     "Malakia Plaza. Office No 18. 4th Floor. Plot No 10. 3rd. Class, Block M. Hai Neem. Juba South Sudan.",

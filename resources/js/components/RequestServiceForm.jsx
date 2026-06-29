@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useServices } from '../context/ServicesContext';
+import { trackFormSubmit } from '@/lib/analytics';
 
 const inputClass =
     'w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:border-transparent outline-none transition-colors';
@@ -18,6 +19,7 @@ export default function RequestServiceForm({
         company: '',
         service: '',
         message: '',
+        website: '',
     });
     const [submitted, setSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -52,6 +54,7 @@ export default function RequestServiceForm({
             }
 
             setSubmitted(true);
+            trackFormSubmit(source);
         } catch (err) {
             console.error(err);
             setError(
@@ -105,7 +108,7 @@ export default function RequestServiceForm({
     return (
         <form
             onSubmit={handleSubmit}
-            className="space-y-5 rounded-2xl border border-gray-200 bg-gray-50 p-8"
+            className="relative space-y-5 rounded-2xl border border-gray-200 bg-gray-50 p-8"
         >
             <h3 className="mb-6 text-xl font-bold">{title}</h3>
             {error && (
@@ -210,6 +213,18 @@ export default function RequestServiceForm({
                     onChange={handleChange}
                     className={`${inputClass} resize-none`}
                     placeholder="Describe your requirements or project details..."
+                />
+            </div>
+            <div className="absolute -left-[9999px]" aria-hidden="true">
+                <label htmlFor="request-website">Website</label>
+                <input
+                    type="text"
+                    id="request-website"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData.website}
+                    onChange={handleChange}
                 />
             </div>
             <button

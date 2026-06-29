@@ -1,20 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { companyName, contact, social } from '@/data/site';
+import { trackEmailClick, trackPhoneClick } from '@/lib/analytics';
 
 export default function Footer() {
     return (
         <footer className="bg-primary-dark text-white">
             <div className="container-px mx-auto max-w-6xl px-5 py-12">
-                <div className="grid gap-8 md:grid-cols-3">
+                <div className="grid gap-8 md:grid-cols-4">
                     <div>
-                        <h3 className="mb-4 text-lg font-bold">
-                            3K General Trading Ltd
-                        </h3>
+                        <h3 className="mb-4 text-lg font-bold">{companyName}</h3>
                         <p className="mb-2 text-sm text-white/90">
                             Accountability, Transparency & Compliance
                         </p>
                         <p className="text-sm font-semibold text-white/90">
-                            "Quality and Reliability"
+                            &ldquo;Quality and Reliability&rdquo;
                         </p>
                     </div>
                     <div>
@@ -26,10 +26,27 @@ export default function Footer() {
                                 { to: '/services', label: 'Services' },
                                 { to: '/projects', label: 'Projects' },
                                 { to: '/contact', label: 'Contact' },
-                                {
-                                    to: '/request-service',
-                                    label: 'Request Service',
-                                },
+                                { to: '/request-service', label: 'Request a Quote' },
+                                { to: '/careers', label: 'Careers' },
+                            ].map((link) => (
+                                <li key={link.to}>
+                                    <Link
+                                        to={link.to}
+                                        className="text-sm text-white/90 transition-colors hover:text-white"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 className="mb-4 text-lg font-bold">Locations</h3>
+                        <ul className="space-y-2">
+                            {[
+                                { to: '/locations/juba', label: 'Juba' },
+                                { to: '/locations/south-sudan', label: 'South Sudan' },
+                                { to: '/locations/east-africa', label: 'East Africa' },
                             ].map((link) => (
                                 <li key={link.to}>
                                     <Link
@@ -45,37 +62,46 @@ export default function Footer() {
                     <div>
                         <h3 className="mb-4 text-lg font-bold">Contact</h3>
                         <address className="space-y-1 text-sm text-white/90 not-italic">
-                            <p>Malakia Plaza, Office No 18</p>
-                            <p>Plot No 10, Block M, Hai Neem</p>
-                            <p>Juba, South Sudan</p>
+                            <p>{contact.address}</p>
+                            {contact.phones.slice(0, 2).map((phone) => (
+                                <a
+                                    key={phone}
+                                    href={`tel:${phone.replace(/\D/g, '')}`}
+                                    onClick={() => trackPhoneClick('footer')}
+                                    className="block hover:text-white"
+                                >
+                                    {phone.replace('+211 (0) ', '+211 ')}
+                                </a>
+                            ))}
                             <a
-                                href="tel:+211929986001"
-                                className="mt-2 block hover:text-white"
-                            >
-                                +211 929 986 001
-                            </a>
-                            <a
-                                href="mailto:info@3kgtrading.com"
+                                href={`mailto:${contact.email}`}
+                                onClick={() => trackEmailClick('footer')}
                                 className="block hover:text-white"
                             >
-                                info@3kgtrading.com
+                                {contact.email}
                             </a>
                         </address>
                     </div>
                 </div>
-                <div className="mt-12 border-t border-white/20 pt-8 text-center text-sm text-white/80">
-                    <p>
-                        © {new Date().getFullYear()} 3K General Trading Ltd. All
-                        rights reserved.
-                    </p>
-                    <a
-                        href="https://www.3kgtrading.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="transition-colors hover:text-white"
-                    >
-                        www.3kgtrading.com
-                    </a>
+                <div className="mt-12 flex flex-col items-center gap-3 border-t border-white/20 pt-8 text-center text-sm text-white/80 sm:flex-row sm:justify-between">
+                    <p>© {new Date().getFullYear()} {companyName}. All rights reserved.</p>
+                    <div className="flex flex-wrap justify-center gap-4">
+                        <Link to="/privacy" className="transition-colors hover:text-white">
+                            Privacy Policy
+                        </Link>
+                        <Link to="/terms" className="transition-colors hover:text-white">
+                            Terms & Conditions
+                        </Link>
+                        <a
+                            href={social.facebook}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="transition-colors hover:text-white"
+                            aria-label="Facebook"
+                        >
+                            Facebook
+                        </a>
+                    </div>
                 </div>
             </div>
         </footer>

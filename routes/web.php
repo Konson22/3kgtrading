@@ -1,85 +1,43 @@
 <?php
 
 use App\Http\Controllers\ContactRequestController;
-use App\Http\Controllers\CurrentBranchController;
-use App\Http\Controllers\OnboardingController;
-use App\Models\Business;
+use App\Support\Seo\GuestSeoResolver;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-$baseHost = parse_url((string) config('app.url'), PHP_URL_HOST);
-$baseDomain = $baseHost ?: 'app.local';
+$guestView = fn (Request $request) => view('guest', [
+    'seo' => GuestSeoResolver::forRequest($request),
+]);
 
-if (str_starts_with($baseDomain, 'admin.')) {
-    $baseDomain = substr($baseDomain, 6);
-}
+Route::get('/', $guestView)->name('home');
 
-$adminDomain = 'admin.'.$baseDomain;
+Route::redirect('/quote', '/request-service', 301);
 
-// Root route behaves differently depending on host:
-// - admin.[baseDomain]: send admins to dashboard, others to login
-// - base domain: send authenticated users to dashboard, others to login
-Route::get('/', function (Request $request) use ($adminDomain) {
-    if ($request->getHost() === $adminDomain) {
-        if ($request->user()?->isAdmin()) {
-            if (! Business::query()->exists()) {
-                return redirect()->route('onboarding.business');
-            }
+Route::get('/BingSiteAuth.xml', function () {
+    $token = config('seo.bing_site_auth_token');
+    abort_unless($token, 404);
 
-            return redirect()->route('dashboard');
-        }
-
-        return redirect()->to('/login');
-    }
-
-    if ($request->user()) {
-        if (! Business::query()->exists()) {
-            return redirect()->route('onboarding.business');
-        }
-
-        return redirect()->route('dashboard');
-    }
-
-    return redirect()->to('/login');
-})->name('home');
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('onboarding/business', [OnboardingController::class, 'create'])
-        ->name('onboarding.business');
-    Route::post('onboarding/business', [OnboardingController::class, 'store'])
-        ->name('onboarding.business.store');
+    return response(
+        '<?xml version="1.0"?><users><user>'.e($token).'</user></users>',
+        200,
+        ['Content-Type' => 'application/xml']
+    );
 });
 
-// Authenticated app (dashboard, POS, etc.) — registered globally so /dashboard works when
-// APP_URL is an IP or hostname without a separate admin subdomain (avoids post-login 404).
-Route::middleware(['auth', 'verified', 'business.setup', 'staff.branch'])->group(function () {
-    Route::post('context/branch', [CurrentBranchController::class, 'update'])
-        ->name('context.branch');
-    require __DIR__.'/admin.php';
-});
+Route::get('/{key}.txt', function (string $key) {
+    $indexKey = config('seo.indexnow_key');
+    abort_unless($indexKey && $key === $indexKey, 404);
 
-// Public API + user settings on the base domain
-Route::domain($baseDomain)->middleware(['business.setup'])->group(function () {
-    Route::post('api/contact-request', ContactRequestController::class)
-        ->withoutMiddleware([VerifyCsrfToken::class]);
+    return response($indexKey, 200, ['Content-Type' => 'text/plain']);
+})->where('key', '[a-zA-Z0-9-]+');
 
-    require __DIR__.'/settings.php';
-});
+Route::post('api/contact-request', ContactRequestController::class)
+    ->middleware('throttle:5,1')
+    ->withoutMiddleware([VerifyCsrfToken::class]);
 
-// Fallback: keep admin subdomain users on admin area, others 404
-Route::fallback(function (Request $request) use ($adminDomain) {
-    if ($request->getHost() === $adminDomain) {
-        if ($request->user()?->isAdmin()) {
-            if (! Business::query()->exists()) {
-                return redirect()->route('onboarding.business');
-            }
+require __DIR__.'/settings.php';
 
-            return redirect()->route('dashboard');
-        }
-
-        return redirect()->to('/login');
-    }
-
-    abort(404);
-});
+Route::get('/{any?}', $guestView)
+    ->where('any', '^(?!api|login|register|password|verification|user-password|settings).*$')
+    ->name('guest');

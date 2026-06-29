@@ -14,12 +14,12 @@ import {
 } from '@/components/ui/sidebar';
 import type { NavItem } from '@/types';
 import AppLogo from './app-logo';
-import { dashboard } from '@/routes';
+import { edit } from '@/routes/profile';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
-        href: dashboard(),
+        title: 'Settings',
+        href: edit(),
         icon: LayoutGrid,
     },
 ];

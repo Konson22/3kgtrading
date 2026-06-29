@@ -1,2 +1,8 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /login
+Disallow: /register
+Disallow: /settings
+
+Sitemap: https://3kgtrading.com/sitemap.xml
+Sitemap: https://3kgtrading.com/sitemap-images.xml

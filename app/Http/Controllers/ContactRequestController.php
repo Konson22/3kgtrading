@@ -11,6 +11,10 @@ class ContactRequestController extends Controller
 {
     public function __invoke(Request $request): JsonResponse
     {
+        if ($request->filled('website')) {
+            return response()->json(['success' => true]);
+        }
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
@@ -119,4 +123,3 @@ class ContactRequestController extends Controller
         return $html;
     }
 }
-
