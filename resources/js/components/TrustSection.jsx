@@ -61,9 +61,9 @@ export default function TrustSection() {
                 </div>
 
                 <div className="mt-8 rounded-xl border border-gray-100 bg-gray-50/80 p-4 shadow-sm sm:mt-14 sm:rounded-2xl sm:p-6 md:p-8 lg:p-10">
-                    <h3 className="text-center font-display text-lg font-bold text-gray-900 sm:text-xl md:text-2xl">
+                    <p className="text-center font-display text-lg font-bold text-gray-900 sm:text-xl md:text-2xl">
                         What You Can Expect From Us
-                    </h3>
+                    </p>
                     <ul className="mx-auto mt-6 grid max-w-4xl gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-4">
                         {whyChooseUs.map((item) => (
                             <li

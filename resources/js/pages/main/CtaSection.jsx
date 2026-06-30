@@ -20,22 +20,17 @@ const ArrowIcon = () => (
 export default function CtaSection() {
     return (
         <section className="relative overflow-hidden py-20 sm:py-28">
-            {/* Background image */}
-            <div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{
-                    backgroundImage: "url('/images/city.jpg')",
-                }}
-                aria-hidden
+            <img
+                src="/images/city.jpg"
+                alt="Juba city skyline — 3K General Trading service area in South Sudan"
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover object-center"
             />
-            {/* Dark overlay for text contrast */}
             <div className="absolute inset-0 bg-primary-dark/70" aria-hidden />
-            {/* Accent bar */}
             <div
                 className="absolute top-0 left-0 z-10 h-1 w-full bg-gradient-to-r from-primary via-primary/80 to-secondary"
                 aria-hidden
             />
-            {/* Grid */}
             <div className="absolute inset-0 z-10 opacity-[0.06]" aria-hidden />
             <div className="container-px relative z-20 mx-auto max-w-4xl px-4 text-center sm:px-6">
                 <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase sm:text-sm">

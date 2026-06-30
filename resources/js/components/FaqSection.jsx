@@ -1,3 +1,5 @@
+export { homeFaqs, jubaFaqs, southSudanFaqs, eastAfricaFaqs } from '@/data/faqs';
+
 export default function FaqSection({ title = 'Frequently Asked Questions', faqs = [] }) {
     if (!faqs.length) {
         return null;
@@ -36,51 +38,3 @@ export default function FaqSection({ title = 'Frequently Asked Questions', faqs 
         </section>
     );
 }
-
-export const homeFaqs = [
-    {
-        question: 'What services does 3K General Trading offer in South Sudan?',
-        answer: 'We offer general construction, financial management, property management, small business consultancy, procurement, import and export, logistics, and industrial supplies across South Sudan and East Africa.',
-    },
-    {
-        question: 'Where is 3K General Trading located?',
-        answer: 'Our head office is at Malakia Plaza, Office No 18, 4th Floor, Plot No 10, Block M, Hai Neem, Juba, South Sudan.',
-    },
-    {
-        question: 'Do you supply construction materials in Juba?',
-        answer: 'Yes. We are a building materials and construction materials supplier in Juba, serving government, NGOs, and private sector clients across South Sudan.',
-    },
-    {
-        question: 'How can I request a quote?',
-        answer: 'Visit our Request a Quote page or call +211 929 986 001. We respond promptly to procurement and service enquiries.',
-    },
-    {
-        question: 'Do you provide logistics services in South Sudan?',
-        answer: 'Yes. We operate as a logistics company in South Sudan, supporting import, export, and supply chain needs for businesses and organisations.',
-    },
-];
-
-export const jubaFaqs = [
-    {
-        question: 'Do you deliver building materials in Juba?',
-        answer: 'Yes. We supply and deliver building materials and construction supplies to clients across Juba and surrounding areas.',
-    },
-    {
-        question: 'Can NGOs in Juba use your procurement services?',
-        answer: 'Absolutely. We work with NGOs, government agencies, and private companies for procurement and logistics in Juba.',
-    },
-];
-
-export const southSudanFaqs = [
-    {
-        question: 'Do you serve clients outside Juba?',
-        answer: 'Yes. While headquartered in Juba, we serve clients across South Sudan with procurement, construction, and logistics services.',
-    },
-];
-
-export const eastAfricaFaqs = [
-    {
-        question: 'Does 3K General Trading operate beyond South Sudan?',
-        answer: 'Our primary operations are in South Sudan with East Africa regional trading and procurement partnerships. Contact us to discuss cross-border requirements.',
-    },
-];

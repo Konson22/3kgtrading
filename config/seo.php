@@ -50,8 +50,8 @@ return [
 
     'pages' => [
         '/' => [
-            'title' => '3K General Trading Co. Ltd | General Trading Company in South Sudan',
-            'description' => 'Leading general trading and procurement company in South Sudan. Construction materials, logistics, import & export, office supplies, and industrial supplies in Juba and East Africa.',
+            'title' => '3K General Trading | Procurement & Construction in South Sudan',
+            'description' => 'Leading general trading and procurement company in Juba, South Sudan. Construction materials, logistics, import/export, and industrial supplies across East Africa.',
             'keywords' => 'General Trading Company in South Sudan, Trading and Procurement Company in East Africa, Procurement Services in South Sudan',
             'og_type' => 'website',
         ],

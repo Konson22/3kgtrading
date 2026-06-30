@@ -49,6 +49,7 @@ export default function ProjectsSection() {
                     <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-14 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
                         {displayedProjects.map((project, index) => {
                             const projectSlug = slugify(project.name);
+                            const projectUrl = `/projects/${projectSlug}`;
 
                             return (
                                 <article
@@ -62,67 +63,61 @@ export default function ProjectsSection() {
                                     />
 
                                     <Link
-                                        to={`/projects/${projectSlug}`}
-                                        className="relative block aspect-[16/10] overflow-hidden sm:aspect-[5/3]"
+                                        to={projectUrl}
+                                        className="flex flex-1 flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                                     >
-                                        <img
-                                            src={project.image}
-                                            alt={`${project.name} project`}
-                                            loading="lazy"
-                                            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                                        {isOngoing(project) && (
-                                            <span className="absolute left-3 top-3 inline-flex items-center rounded-full bg-secondary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white sm:left-4 sm:top-4 sm:px-3 sm:text-xs">
-                                                Ongoing
-                                            </span>
-                                        )}
-                                        <span
-                                            className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center bg-primary/90 text-[10px] font-bold text-white shadow-sm sm:right-4 sm:top-4 sm:h-8 sm:w-8 sm:text-xs"
-                                            style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}
-                                            aria-hidden
-                                        >
-                                            {String(index + 1).padStart(2, '0')}
-                                        </span>
-                                    </Link>
-
-                                    <div className="flex flex-1 flex-col p-4 sm:p-5 md:p-6">
-                                        <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-secondary sm:text-xs">
-                                            {project.client}
-                                        </span>
-                                        <h3 className="mt-2 font-display text-base font-bold leading-snug text-gray-900 sm:text-lg md:text-xl">
-                                            <Link
-                                                to={`/projects/${projectSlug}`}
-                                                className="transition-colors hover:text-primary"
-                                            >
-                                                {project.name}
-                                            </Link>
-                                        </h3>
-                                        <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-gray-600 sm:line-clamp-3 sm:text-base">
-                                            {project.description}
-                                        </p>
-
-                                        <div className="mt-4 space-y-2 border-t border-gray-100 pt-4 text-xs text-gray-600 sm:text-sm">
-                                            <div className="flex items-center gap-2">
-                                                <CalendarRange className="h-4 w-4 shrink-0 text-primary" aria-hidden />
-                                                <span>
-                                                    {project.startDate} – {project.endDate}
+                                        <div className="relative aspect-[16/10] overflow-hidden sm:aspect-[5/3]">
+                                            <img
+                                                src={project.image}
+                                                alt={`${project.name} project`}
+                                                loading="lazy"
+                                                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                                            {isOngoing(project) && (
+                                                <span className="absolute left-3 top-3 inline-flex items-center rounded-full bg-secondary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white sm:left-4 sm:top-4 sm:px-3 sm:text-xs">
+                                                    Ongoing
                                                 </span>
-                                            </div>
-                                            <div className="flex items-center gap-2 font-semibold text-primary">
-                                                <CircleDollarSign className="h-4 w-4 shrink-0" aria-hidden />
-                                                <span>{formatValue(project.value)}</span>
-                                            </div>
+                                            )}
+                                            <span
+                                                className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center bg-primary/90 text-[10px] font-bold text-white shadow-sm sm:right-4 sm:top-4 sm:h-8 sm:w-8 sm:text-xs"
+                                                style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}
+                                                aria-hidden
+                                            >
+                                                {String(index + 1).padStart(2, '0')}
+                                            </span>
                                         </div>
 
-                                        <Link
-                                            to={`/projects/${projectSlug}`}
-                                            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition hover:gap-2.5"
-                                        >
-                                            View project details
-                                            <ArrowRight className="h-4 w-4" aria-hidden />
-                                        </Link>
-                                    </div>
+                                        <div className="flex flex-1 flex-col p-4 sm:p-5 md:p-6">
+                                            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-secondary sm:text-xs">
+                                                {project.client}
+                                            </span>
+                                            <h3 className="mt-2 font-display text-base font-bold leading-snug text-gray-900 transition-colors group-hover:text-primary sm:text-lg md:text-xl">
+                                                {project.name}
+                                            </h3>
+                                            <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-gray-600 sm:line-clamp-3 sm:text-base">
+                                                {project.description}
+                                            </p>
+
+                                            <div className="mt-4 space-y-2 border-t border-gray-100 pt-4 text-xs text-gray-600 sm:text-sm">
+                                                <div className="flex items-center gap-2">
+                                                    <CalendarRange className="h-4 w-4 shrink-0 text-primary" aria-hidden />
+                                                    <span>
+                                                        {project.startDate} – {project.endDate}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center gap-2 font-semibold text-primary">
+                                                    <CircleDollarSign className="h-4 w-4 shrink-0" aria-hidden />
+                                                    <span>{formatValue(project.value)}</span>
+                                                </div>
+                                            </div>
+
+                                            <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition group-hover:gap-2.5">
+                                                View project details
+                                                <ArrowRight className="h-4 w-4" aria-hidden />
+                                            </span>
+                                        </div>
+                                    </Link>
                                 </article>
                             );
                         })}

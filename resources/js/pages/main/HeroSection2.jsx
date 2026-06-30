@@ -10,6 +10,7 @@ export const heroSlides = [
     subSlogan:
       "Reliable real estate solutions including property sales, rent management, and professional consultancy.",
     image: "/images/services/property-real-estate.jpg",
+    alt: "Property management and real estate services by 3K General Trading in South Sudan",
   },
   {
     id: 3,
@@ -18,6 +19,7 @@ export const heroSlides = [
     subSlogan:
       "Business development, financial access, and strategic guidance designed to help entrepreneurs succeed.",
     image: "/images/services/small-business-consultancy.jpg",
+    alt: "Small business consultancy services by 3K General Trading in Juba, South Sudan",
   },
   {
     id: 4,
@@ -26,6 +28,7 @@ export const heroSlides = [
     subSlogan:
       "Comprehensive construction services including buildings, infrastructure, boreholes, electrical works, and fabrication.",
     image: "/images/services/general-construction.jpg",
+    alt: "General construction project by 3K General Trading in South Sudan",
   },
 ];
 
@@ -81,21 +84,35 @@ export default function HeroSection2() {
           exit="exit"
           className="absolute inset-0"
         >
-          {/* Background */}
           <motion.div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url('${slide.image}')` }}
+            className="absolute inset-0 overflow-hidden"
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
-          />
+          >
+            <img
+              src={slide.image}
+              alt={slide.alt}
+              fetchPriority={currentIndex === 0 ? "high" : "auto"}
+              loading={currentIndex === 0 ? "eager" : "lazy"}
+              className="absolute inset-0 h-full w-full object-cover object-center"
+            />
+          </motion.div>
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80" />
           <div className="absolute inset-0 bg-primary/5" />
 
-          {/* Content */}
           <div className="absolute pb-16 lg:pb-0 inset-0 z-10 flex flex-col lg:justify-center justify-end items-start text-left px-4 sm:px-6">
             <div className="max-w-4xl">
               <motion.h1
+                custom={0}
+                variants={contentVariants}
+                initial="hidden"
+                animate="visible"
+                className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white/95 mb-4 leading-[1.15] tracking-tight"
+              >
+                General Trading &amp; Procurement Company in South Sudan
+              </motion.h1>
+              <motion.p
                 custom={1}
                 variants={contentVariants}
                 initial="hidden"
@@ -103,7 +120,7 @@ export default function HeroSection2() {
                 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight"
               >
                 {slide.slogan}
-              </motion.h1>
+              </motion.p>
               <motion.p
                 custom={2}
                 variants={contentVariants}
@@ -161,7 +178,6 @@ export default function HeroSection2() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Pagination dots */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {heroSlides.map((_, i) => (
           <button

@@ -9,7 +9,7 @@ export default function Footer() {
             <div className="container-px mx-auto max-w-6xl px-5 py-12">
                 <div className="grid gap-8 md:grid-cols-4">
                     <div>
-                        <h3 className="mb-4 text-lg font-bold">{companyName}</h3>
+                        <p className="mb-4 text-lg font-bold">{companyName}</p>
                         <p className="mb-2 text-sm text-white/90">
                             Accountability, Transparency & Compliance
                         </p>
@@ -18,7 +18,7 @@ export default function Footer() {
                         </p>
                     </div>
                     <div>
-                        <h3 className="mb-4 text-lg font-bold">Quick Links</h3>
+                        <p className="mb-4 text-lg font-bold">Quick Links</p>
                         <ul className="space-y-2">
                             {[
                                 { to: '/', label: 'Home' },
@@ -41,7 +41,7 @@ export default function Footer() {
                         </ul>
                     </div>
                     <div>
-                        <h3 className="mb-4 text-lg font-bold">Locations</h3>
+                        <p className="mb-4 text-lg font-bold">Locations</p>
                         <ul className="space-y-2">
                             {[
                                 { to: '/locations/juba', label: 'Juba' },
@@ -60,7 +60,7 @@ export default function Footer() {
                         </ul>
                     </div>
                     <div>
-                        <h3 className="mb-4 text-lg font-bold">Contact</h3>
+                        <p className="mb-4 text-lg font-bold">Contact</p>
                         <address className="space-y-1 text-sm text-white/90 not-italic">
                             <p>{contact.address}</p>
                             {contact.phones.slice(0, 2).map((phone) => (
